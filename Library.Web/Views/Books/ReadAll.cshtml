@@ -1,0 +1,312 @@
+@model Library.Domain.Models.Book.BooksList
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<style>
+    .btn-sm 
+    {
+        border-radius: 0px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <h2 align="center">Книги</h2>
+        </div>
+        <div class="col-sm-3">
+            <a class="btn btn-light-green btn-block" role="button" asp-controller="Books" asp-action="Create">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                Добавить
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table id="booksTable" class="table table-hover">
+            <thead>
+            <tr>
+                <th>
+                    Обложка
+                </th>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Стоимость
+                </th>
+                <th>
+                    Год издания
+                </th>
+                <th>
+                    Действия
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var book in Model.Books)
+            {
+                var cost = book.Cost.Split("; ");
+
+                <tr>
+                    <td class="d-none d-lg-block">
+                        <div class="view">
+                            <a asp-controller="Books" asp-action="Read" asp-route-guid="@book.BookGuid">
+                                <img src="@book.ImageUri" class="img-fluid rounded" width="300px" alt="placeholder">
+                                <div class="mask flex-center waves-effect waves-light"></div>
+                            </a>
+                        </div>
+                    </td>
+                    <td>@book.Title</td>
+                    <td>
+                        @if (cost.Count() != 0)
+                        {
+                            <p>@cost[0]</p>
+                            if (cost.Count() > 1)
+                            {
+                                <p>@cost[1]</p>
+                            }
+                        }
+
+                    </td>
+                    <td>@book.Year</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="btn group">
+                            <span data-toggle="modal" data-target="#Info-@book.BookGuid">
+                                <a class="btn btn-light btn-sm btn-block" role="button" data-toggle="tooltip" data-placement="top" title="Информация о книге">
+                                    <i class="fa fa-info fa-lg " aria-hidden="true"></i>
+                                </a>
+                            </span>
+                            
+                            <a class="btn btn-light btn-sm btn-block" role="button" asp-area="" asp-controller="Books" asp-action="Edit" asp-route-guid="@book.BookGuid" data-toggle="tooltip" data-placement="top" title="Редактирование">
+                                <i class="fa fa-edit fa-lg" aria-hidden="true"></i>
+                            </a>
+
+                            <span data-toggle="modal" data-target="#Delete-@book.BookGuid">
+                                <button class="btn btn-light btn-sm btn-block" type="button" data-toggle="tooltip" data-placement="top" title="Удалить">
+                                    <i class="fa fa-remove fa-lg red-text" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <hr/>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        @if (Model.PreviousPage != 0)
+        {
+            <a class="btn btn-light-green" role="button" asp-controller="Books" asp-action="ReadAll" asp-route-page="@Model.PreviousPage">Предыдущая</a>
+        }
+
+        @for (int i = 1; i <= Model.Count; i++)
+        {
+            if (Model.CurrentPage == i)
+            {
+                <button type="button" class="btn btn-light-green" disabled>@i</button>
+            }
+            else
+            {
+                <a class="btn btn-light-green" role="button" asp-controller="Books" asp-action="ReadAll" asp-route-page="@i">@i</a>
+            }
+        }
+
+        @if (Model.NextPage <= Model.Count)
+        {
+            <a class="btn btn-light-green" role="button" asp-controller="Books" asp-action="ReadAll" asp-route-page="@Model.NextPage">Следующая</a>
+        }
+
+    </div>
+</div>
+
+<!--Modal: Delete-->
+@foreach (var book in Model.Books)
+{
+    <div class="modal fade" id="Delete-@book.BookGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog modal-lg modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <p class="heading">Подтверждение удаления</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+                    <p class="lead">
+                        Удалить информацию о книге "@book.Title"?
+                    </p>
+                    <button type="button" class="btn btn-blue-grey" data-dismiss="modal" aria-label="Close">
+                        Отмена
+                    </button>
+                    <a role="button" class="btn btn-danger" asp-controller="Books" asp-action="Delete" asp-route-guid="@book.BookGuid">Удалить</a>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+}
+<!--Modal: Delete-->
+
+<!--Modal: Info -->
+@foreach (var book in Model.Books)
+{
+    <div class="modal fade top" id="Info-@book.BookGuid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-full-height modal-top modal-info" role="document">
+            <div class="modal-content">
+                <div class="container">
+                    <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel">@book.Title</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6 col-md-3">
+                                    <div class="view">
+                                        <img src="@book.ImageUri" class="img-fluid rounded" alt="placeholder">
+                                        <div class="mask flex-center waves-effect waves-light"></div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <div class="row">
+                                        <div class="col-4 col-md-3">
+                                            <b>Издательство</b>
+                                        </div>
+                                        <div class="col-8 col-md-6">
+                                            <p>@book.PublishingModel.Name</p>
+                                        </div>
+                                    </div>
+                                    @if (@book.AuthorModel.Count != 0)
+                                    {
+                                        <div class="row">
+                                            <div class="col-4 col-md-3">
+                                                <b>Автор</b>
+                                            </div>
+
+                                            <div class="col-8 col-md-6">
+
+                                                @foreach (var authorModel in book.AuthorModel)
+                                                {
+                                                    <p>@authorModel.Surname @authorModel.Name @authorModel.Patronymic</p>
+                                                }
+
+                                            </div >
+
+                                        </div>
+                                    }
+                                    <div class="row">
+                                        <div class="col-4 col-md-3">
+                                            <b>Формат</b>
+                                        </div>
+                                        <div class="col-8 col-md-6">
+                                            <p>@book.Format</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 col-md-3">
+                                            <b>Серия книг</b>
+                                        </div>
+                                        <div class="col-8 col-md-6">
+                                            <p>@book.TechnologyModel.Name</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 col-md-3">
+                                            <b>Количество страниц</b>
+                                        </div>
+                                        <div class="col-8 col-md-6">
+                                            <p>@book.NumberOfPages</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 col-md-3">
+                                            <b>Год издания</b>
+                                        </div>
+                                        <div class="col-8 col-md-6">
+                                            <p>@book.Year</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 col-md-3">
+                                            <b>Стоимость</b>
+                                        </div>
+                                        <div class="col-8 col-md-6">
+                                            <p>@book.Cost</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 10px">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-6 col-md-3">
+                                            <a class="btn btn-light btn-sm btn-block" data-toggle="collapse" href="#AnnotationCollapse-@book.BookGuid" role="button" aria-expanded="false" aria-controls="AnnotationCollapse-@book.BookGuid">Аннотация</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="collapse" id="AnnotationCollapse-@book.BookGuid">
+                                            <div class="mt-3">
+                                                @book.Annotation
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        @if (@book.BuyUri != null)
+                        {
+                            <a role="button" class="btn btn-cyan" onclick="openInNewTab('@book.BuyUri')">Купить</a>
+                        }
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--Modal: Info -->
+
+<script>
+    function openInNewTab(url) {
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#authorsTable').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(function() {
+        $.ajaxSetup({ cache: false });
+        $(".compItem").click(function(e) {
+
+            e.preventDefault();
+            $.get(this.href,
+                function(data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+        });
+    })
+</script>

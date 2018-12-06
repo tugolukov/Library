@@ -1,0 +1,162 @@
+@using Library.Domain.Models.Author
+@using Library.Domain.Models.Book
+@using Library.Web.Utils
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Swashbuckle.AspNetCore.Swagger
+@model object
+
+@{
+    ViewBag.Title = "Поиск";
+    Layout = "_Layout";
+}
+<style>
+    .nav-link:hover {
+        border-radius: 4px;
+        background: #dddddd;
+    }
+    .nav-link {
+        border-radius: 4px;
+    }
+    </style>
+
+<div class="container">
+    <h2 align="center">Поиск</h2>
+    <ul class="nav nav-tabs" id="SearchTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active mytab" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="true">По двум параметрам</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="author-tab" data-toggle="tab" href="#author" role="tab" aria-controls="author" aria-selected="false">По автору</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pub-tab" data-toggle="tab" href="#pub" role="tab" aria-controls="pub" aria-selected="false">По издательству</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="SearchTabContent">
+        <div class="tab-pane fade show active" id="two" role="tabpanel" aria-labelledby="two-tab">
+            @using (@Html.BeginForm("TwoParams", "Search", FormMethod.Post))
+            {
+                <div class="row" style="padding-top: 20px">
+                    <div class="col-5">
+                        @Html.DropDownList("technology", ViewBag.technology as SelectList, "Выберите серию", new {id = "technology-dropdown", @class = "form-control mysearch"})
+                    </div>
+                    <div class="col-5">
+                        @Html.DropDownList("author", ViewBag.author as SelectList, "Выберите автора", new {id = "author-dropdown", @class = "form-control mysearch"})
+                    </div>
+                    <div class="col-2">
+                        <button role="button" id="twoparamssubmit" class="btn btn-info mysearch btn-block">Поиск</button>
+                    </div>
+                </div>
+            }
+
+            <div id="twoparams"></div>
+        </div>
+        <div class="tab-pane fade" id="author" role="tabpanel" aria-labelledby="author-tab">
+            @using (@Html.BeginForm("AuthorsSearch", "Search", FormMethod.Get, new {@class = "form-row md-form"}))
+            {
+                <div class="col-10">
+                    <input type="text" id="authorInput" name="authorInput" class="form-control" aria-describedby="authorHelpSearch">
+                    <label for="authorInput">Найти</label>
+                    <small id="authorHelpSearch" class="form-text text-muted">
+                        Введите текст в поле для ввода. Если введенные вами данные встречаются в информации об авторе, мы выведем имена всех найденных авторов, а так же книги, написанные данными авторами.
+                    </small>
+                </div>
+                <div class="col-2">
+                    <button type="button" id="authorssearch" class="btn btn-info btn-block">Поиск</button>
+                </div>
+            }
+            <div id="authorssearchcontent"></div>
+        </div>
+        <div class="tab-pane fade" id="pub" role="tabpanel" aria-labelledby="pub-tab">
+            @using (@Html.BeginForm("PublishingsSearch", "Search", FormMethod.Get, new {@class = "form-row md-form"}))
+            {
+                <div class="col-10">
+                    <input type="text" id="pubInput" name="pubInput" class="form-control" aria-describedby="pubHelpSearch">
+                    <label for="pubInput">Найти</label>
+                    <small id="pubHelpSearch" class="form-text text-muted">
+                        Введите текст в поле для ввода. Если введенные вами данные встречаются в информации об издательстве, мы выведем имена все найденные издательства, а так же книги, выпущенные данными издательствами.
+                    </small>
+                </div>
+                <div class="col-2">
+                    <button type="button" id="publishingssearch" class="btn btn-info btn-block">Поиск</button> 
+                </div>
+            }
+            <div id="publishingssearchcontent"></div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function() {
+
+            $('#technology-dropdown').change(function() {
+                // получаем выбранный id
+                var id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '/search/authors?id=' + id,
+                    success: function(data) {
+
+                        // заменяем содержимое присланным частичным представлением
+                        $('#author-dropdown').replaceWith(data);
+                    }
+                });
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        $(function() {
+
+            $('#author-dropdown').change(function() {
+                // получаем выбранный id
+                var id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '/search/technologies?id=' + id,
+                    success: function(data) {
+
+                        // заменяем содержимое присланным частичным представлением
+                        $('#technology-dropdown').replaceWith(data);
+                    }
+                });
+            });
+        })
+    </script>
+    
+    <script type="text/javascript">
+        $(function loadtwoparams() {
+            $('#twoparamssubmit').click(function (e) {
+                e.preventDefault();
+                var author = $('#author-dropdown').val();
+                var technology = $('#technology-dropdown').val();
+                author=encodeURIComponent(author);
+                technology=encodeURIComponent(technology);
+                $('#twoparams').load('/search/twoparams?author=' + author + '&technology=' + technology);
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function loadauthors() {
+            $('#authorssearch').click(function (e) {
+                e.preventDefault();
+                var authorInput = $('#authorInput').val();
+                authorInput=encodeURIComponent(authorInput);
+                $('#authorssearchcontent').load('/search/authorssearch?authorInput=' + authorInput);
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function loadpublishings() {
+            $('#publishingssearch').click(function (e) {
+                e.preventDefault();
+                var pubInput = $('#pubInput').val();
+                pubInput=encodeURIComponent(pubInput);
+                $('#publishingssearchcontent').load('/search/publishingssearch?pubInput=' + pubInput);
+            });
+        });
+    </script>
+
+}
