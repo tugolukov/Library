@@ -1,0 +1,160 @@
+@model object
+
+@{
+    ViewBag.Title = "Полезные ссылки";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <h3 align="center">Полезные ссылки</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col"></th>
+                <th scope="col">Описание</th>
+                <th scope="col">Ссылка</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>
+                    <div class="view overlay">
+                        <img src="../images/links/itproger.png" class="rounded" width="100px"/>
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    itProger - сообщество программистов! Информационно развлекательный портал для программистов!
+                    Обучающие курсы, новости в сфере IT и многое другое.
+                </td>
+                <td><a class="btn btn-info btn-block" role="button" onclick="openInNewTab('https://itproger.com/')">Перейти на itproger.com</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>
+                    <div class="view overlay">
+                        <img src="../images/links/proglib.jpg" class="rounded" width="100px"/>
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    Библиотека программиста — ваш источник образовательного контента в IT-сфере. Мы публикуем
+                    обзоры книг, видеолекции и видеоуроки, дайджесты и образовательные статьи, которые помогут вам
+                    улучшить процесс познания в разработке.
+                </td>
+                <td><a class="btn btn-info btn-block" role="button" onclick="openInNewTab('https://proglib.io/')">Перейти на proglib.io</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>
+                    <div class="view overlay">
+                        <img src="../images/links/tproger.png" class="rounded" width="100px"/>
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    Tproger — издание о разработке и обо всём, что с ней связано. Кроме веба мы присутствуем в ВК,
+                    Facebook, Twitter, Telegram и других соцсетях. Более 2 500 000 человек в месяц приходят к нам
+                    за новостями сферы IT, обучающими материалами по разработке, интервью с экспертами индустрии
+                    и просто за потоком информации для программистов и всех, кто связан с миром разработки.
+                </td>
+                <td><a class="btn btn-info btn-block" role="button" onclick="openInNewTab('https://tproger.ru/')">Перейти на tproger.ru</a></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>
+                    <div class="view overlay">
+                        <img src="../images/links/jetbrains.png" class="rounded" width="100px"/>
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    JetBrains производит профессиональные инструменты разработки программного обеспечения, которые 
+                    поддерживают самые передовые технологии, фреймворки и языки программирования.
+                    Мы создаем интеллектуальные программные решения, избавляющие человека от рутины.
+                </td>
+                <td>
+                    <a class="btn btn-info btn-block" role="button" onclick="openInNewTab('https://www.jetbrains.com/')">Перейти на jetbrains.com</a>
+                    <a class="btn btn-info btn-block" role="button" onclick="openInNewTab('https://www.jetbrains.ru/')">Перейти на jetbrains.ru</a>
+                </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>
+                    <div class="view overlay">
+                        <img src="../images/links/vscode.png" class="rounded" width="100px"/>
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    Visual Studio Code — редактор исходного кода, разработанный Microsoft для Windows, Linux и macOS. 
+                    Позиционируется как «лёгкий» редактор кода для кроссплатформенной разработки веб- и облачных приложений. 
+                    Включает в себя отладчик, инструменты для работы с Git, подсветку синтаксиса, IntelliSense и средства 
+                    для рефакторинга.
+                </td>
+                <td>
+                    <a class="btn btn-info btn-block" role="button" onclick="openInNewTab('https://code.visualstudio.com/')">Перейти на code.visualstudio.com</a>
+                </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>
+                    <div class="view overlay">                        
+                        <img src="../images/links/azure.png" class="rounded" width="100px">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    Microsoft Azure — это постоянно расширяющийся набор облачных служб, который помогает вашей 
+                    организации решать бизнес-задачи. Это свобода создания, развертывания приложений и управления ими 
+                    в обширной глобальной сети с использованием ваших любимых инструментов и платформ.
+                </td>
+                <td>
+                    <a class="btn btn-info btn-block" role="button" onclick="openInNewTab('https://azure.microsoft.com/ru-ru/')">Перейти на azure.microsoft.com</a>
+                </td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>
+                    <div class="view overlay">
+                        <img src="/images/links/github.png" class="rounded" width="100px">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    GitHub — крупнейший веб-сервис для хостинга IT-проектов и их совместной разработки. 
+                    Веб-сервис основан на системе контроля версий Git и разработан на Ruby on Rails и 
+                    Erlang компанией GitHub, Inc
+                </td>
+                <td>
+                    <a class="btn btn-info btn-block" role="button" onclick="openInNewTab('https://github.com/')">Перейти на github.com</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function openInNewTab(url) {
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+</script>

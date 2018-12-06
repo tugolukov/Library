@@ -1,0 +1,35 @@
+@model System.Collections.Generic.List<Library.Domain.Models.Book.StatisticModel>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <h2 align="center">Статистика электронной библиотеки</h2>
+    
+    <div class="table-responsive">
+        <table id="dtBasicExample" class="table table-bordered table-hover" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th class="th-sm">
+                    Серия книг
+                </th>
+                <th class="th-sm" onclick="sortTable(1)">
+                    Количество книг
+                </th>
+
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Technology.Name</td>
+                    <td>@item.Count</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,243 @@
+@model object
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="time-tab" data-toggle="tab" href="#time" role="tab" aria-controls="time" aria-selected="true">Яндекс.Часы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="weather-tab" data-toggle="tab" href="#weather" role="tab" aria-controls="weather" aria-selected="false">Погода</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="street-tab" data-toggle="tab" href="#street" role="tab" aria-controls="street" aria-selected="false">Улицы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="vk-tab" data-toggle="tab" href="#vk" role="tab" aria-controls="vk" aria-selected="false">ВКонтакте</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="currency-tab" data-toggle="tab" href="#currency" role="tab" aria-controls="currency" aria-selected="false">Курсы валют</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="yandex-tab" data-toggle="tab" href="#yandex" role="tab" aria-controls="yandex" aria-selected="false">Как проехать</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="news-tab" data-toggle="tab" href="#news" role="tab" aria-controls="news" aria-selected="false">Новости</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="repost-tab" data-toggle="tab" href="#repost" role="tab" aria-controls="repost" aria-selected="false">Поделиться</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="youtube-tab" data-toggle="tab" href="#youtube" role="tab" aria-controls="youtube" aria-selected="false">Видео</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="money-tab" data-toggle="tab" href="#money" role="tab" aria-controls="money" aria-selected="false">Деньги</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="time" role="tabpanel" aria-labelledby="time-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <iframe frameborder="no" scrolling="no" width="150" height="280" src="https://yandex.ru/time/widget/?geoid=6&lang=ru&layout=vert&type=analog&face=digits"></iframe>
+                    <iframe frameborder="no" scrolling="no" width="150" height="280" src="https://yandex.ru/time/widget/?geoid=213&lang=ru&layout=vert&type=analog&face=digits"></iframe>
+                    <iframe frameborder="no" scrolling="no" width="150" height="280" src="https://yandex.ru/time/widget/?geoid=202&lang=ru&layout=vert&type=analog&face=digits"></iframe>
+                    <iframe frameborder="no" scrolling="no" width="150" height="280" src="https://yandex.ru/time/widget/?geoid=10393&lang=ru&layout=vert&type=analog&face=digits"></iframe>
+                    <iframe frameborder="no" scrolling="no" width="150" height="280" src="https://yandex.ru/time/widget/?geoid=Asia%2FTokyo&lang=ru&layout=vert&type=analog&face=digits"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <!-- weather widget start -->
+                    <a target="_blank" href="https://nochi.com/weather/obninsk-46428">
+                        <img src="https://w.bookcdn.com/weather/picture/32_46428_1_20_34495e_250_2c3e50_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=124&domid=589&anc_id=80173" alt="booked.net"/>
+                    </a><!-- weather widget end -->
+                    <!-- weather widget start -->
+                    <a target="_blank" href="https://nochi.com/weather/kaluga-36679">
+                        <img src="https://w.bookcdn.com/weather/picture/32_36679_1_20_34495e_250_2c3e50_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=124&domid=589&anc_id=80173" alt="booked.net"/>
+                    </a><!-- weather widget end -->
+                    <!-- weather widget start -->
+                    <a target="_blank" href="https://nochi.com/weather/moscow-18171">
+                        <img src="https://w.bookcdn.com/weather/picture/32_18171_1_20_34495e_250_2c3e50_ffffff_ffffff_1_2071c9_ffffff_0_6.png?scode=124&domid=589&anc_id=80173" alt="booked.net"/>
+                    </a><!-- weather widget end -->
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="street" role="tabpanel" aria-labelledby="street-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <span class="body-content">
+                        <script src="https://panoramas.api-maps.yandex.ru/embed/1.x/?lang=ru&ll=36.60922854%2C55.11046855&ost=dir%3A357.1993432285699%2C3.1585218552501133~span%3A119.99999999999999%2C58.7517575344735&size=690%2C495&l=stv"></script>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="vk" role="tabpanel" aria-labelledby="vk-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <span class="body-content">
+                        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
+
+                        <!-- VK Widget -->
+                        <div id="vk_groups"></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Group("vk_groups", { mode: 4, wide: 1, width: "700", height: "400" }, 59513058);
+                        </script>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="currency" role="tabpanel" aria-labelledby="currency-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <span class="body-content">
+                        <link rel="stylesheet" type="text/css" href="https://fortrader.org/informers/css?id=46214">
+                        <div class='FTinformersWrapper FT792afa56ae12a374e9323d7affb7c40e FT227191704'>
+                            <script>
+                                document.querySelector(".FT792afa56ae12a374e9323d7affb7c40e.FT227191704").style
+                                    .opacity =
+                                    0;
+                            </script>
+                            <div class="informer_box informer_box_example clearfix alignCenter">
+                                <div class="inlineBlock">
+                                    <table class="informer_table informer1">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="3">
+                                                <a target="_blank" href="https://fortrader.org/currencyrates">Курсы валют ЦБ РФ</a>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="col1">
+                                            <th class="bd_l">Валюта</th><th class="bd_r">RUB</th><th class="bd_r">Завтра</th>
+                                        </tr>
+                                        <tr class="col2 trClass " data-symbol="Доллар США" data-id="2">
+                                            <td class="icon_amount arrow">
+                                                <a target="_blank" class="symbolContainer symbolContainer792afa56ae12a374e9323d7affb7c40e" title="Доллар США" href="https://fortrader.org/currencyrates/usd">USD</a>
+                                            </td><td class="changeVal" data-column="todayCourse"></td><td class="" data-column="tomorrowCourse"></td>
+                                        </tr>
+                                        <tr class="col3 trClass " data-symbol="Евро" data-id="21">
+                                            <td class="icon_amount arrow">
+                                                <a target="_blank" class="symbolContainer symbolContainer792afa56ae12a374e9323d7affb7c40e" title="Евро" href="https://fortrader.org/currencyrates/eur">EUR</a>
+                                            </td><td class="changeVal" data-column="todayCourse"></td><td class="" data-column="tomorrowCourse"></td>
+                                        </tr>
+                                        <tr class="col-data">
+                                            <td colspan="3">
+                                                <time class='ftDateTime' datetime="2018-11-05MSK06:46">Дата <span class='ftDateTimeStr'>---</span> мск </time>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div><script async src="https://fortrader.org/informers/js?id=46214&m=227191704" type="text/javascript"></script>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="yandex" role="tabpanel" aria-labelledby="yandex-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <span class="body-content">
+                        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A62a2a4508e62ed74638130e04280611ab70afec5b5f11a28df6b15d7abf26b27&amp;width=100%25&amp;height=500&amp;lang=ru_RU&amp;scroll=true"></script>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="news" role="tabpanel" aria-labelledby="news-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <span class="body-content">
+                        <style>
+                            .ya-news__title {
+                                font-size: 100%;
+                                font-weight: 700;
+                                margin-bottom: .5em
+                            }
+
+                            .ya-news__date {
+                                font-size: 85%;
+                                margin-right: .5em
+                            }
+
+                            .ya-news__informer {
+                                font-size: 85%;
+                                margin-bottom: .3em
+                            }
+
+                            .ya-news__description {
+                                font-size: 85%;
+                                margin-bottom: .5em
+                            }
+
+                            .ya-news__all {
+                                font-size: 80%;
+                                margin-top: .3em
+                            }
+                        </style>
+                        <script src="//news.yandex.ru/ru/computers.utf8.js" charset="utf-8"></script>
+                        <script>
+                            (function(w, rubric) {
+                                    var data = w[rubric];
+                                    if(!data || !data.length) {
+                                        return;
+                                    }
+                                    function formatDate(ts) {
+                                        var d = new Date(ts * 1000);
+                                        return d.getHours() + ':' + ('0' + d.getMinutes()).substr(-2);
+                                    }
+                                    
+                                    var html = '<N-JQOD class="ya-news__title"><a href="//news.yandex.ru/" target="_blank">Яндекс.Новости</a></N-JQOD>';
+                                    data.sort(function(a,b) {
+                                        return a.date == b.date ? a.time < b.time ? 1 : a.time > b.time ? - 1 : 0 : a.date < b.date ? 1 : a .date > b.date ? - 1 : void 0
+                                    });
+                                    for (var i = 0; i < data.length; i++) {
+                                        var item = data[i];
+                                        html += '<N-JQOD><span class="ya-news__date">' +
+                                            item.date + '&nbsp;' +
+                                            item.time + '</span><span class="ya-news__title"><a href="' +
+                                            item.url + '" target="_blank">' +
+                                            item.title + '</a></span></N-JQOD><N-JQOD class="ya-news__description">' +
+                                            item.descr + '</N-JQOD>';
+                                    }
+                                    html += '<N-JQOD class="ya-news__all"><a href="//news.yandex.ru/" target="_blank">Все новости на ' +
+                                        formatDate(w.update_time_t) + '</a></N-JQOD>';
+                                    document.write(html);
+                                }
+                                (window, 'm_computers'));
+                        </script>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="repost" role="tabpanel" aria-labelledby="repost-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+                    <script src="//yastatic.net/share2/share.js"></script>
+                    <div class="ya-share2" data-services="collections,vkontakte,facebook,odnoklassniki,moimir,gplus,twitter,blogger,reddit,linkedin,viber,whatsapp,skype,telegram" data-counter=""></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="youtube" role="tabpanel" aria-labelledby="youtube-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/KWL9bYk4kSs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="money" role="tabpanel" aria-labelledby="money-tab">
+            <div class="card">
+                <div class="card-body" align="center">
+                    <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=buyer&targets=&targets-hint=&default-sum=150&button-text=12&fio=on&mail=on&hint=&successURL=http%3A%2F%2Felibrary.servebeer.com%2F&quickpay=shop&account=410014088883586" width="100%" height="215" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

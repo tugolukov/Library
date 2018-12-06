@@ -1,0 +1,40 @@
+.page-footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.mysearch {
+    height: 50px;
+    border-radius: 10px;
+}
+
+.btn { border-radius: 10px; }
+
+.navbar {
+    height: 75px;
+}
+
+.dropdown-menu {
+    border-radius: 10px;
+    width: 200px;
+}
+
+.dropdown-item:hover {
+    border-radius: 10px;
+    background: #dddddd;
+}
+
+.nav-link:hover {
+    border-radius: 10px;
+    background: #dddddd;
+}
+
+.alert {
+    border-radius: 10px;
+}
+
+.mytab {
+    border-radius: 10px;
+    border: 0px;
+}

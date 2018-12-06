@@ -1,0 +1,376 @@
+@using System.Web
+@using Library.Database.Models.RSS
+@model System.Collections.Generic.List<Library.Domain.Models.RSS.RssGroupModel>
+
+@{
+    ViewBag.Title = "RSS";
+    Layout = "_Layout";
+    int index = 0;
+    int otherIndex = 0;
+    string navclass = "";
+    string tabclass = "";
+}
+
+<style>
+    .mysearch {
+        height: 50px;
+        border-radius: 10px;
+    }
+
+    .btn { border-radius: 10px; }
+</style>
+
+<div class="container">
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">Внимание!</h4>
+        <p>
+            При обновлении новостей загрузка может занять много времени. Это может быть связано с работой поставщиков
+            RSS-контента, а также с большим количеством источников.
+        </p>
+        <hr>
+        <p class="mb-0">Обновление происходит в фоновом режиме, поэтому вы можете дальше пользоваться сайтом, а мы загрузим свежие новости! Приятного пользования! :)</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h2 align="left">RSS-Новости</h2>
+        </div>
+
+        <div class="col-sm-8">
+            <div class="btn-group" role="group" aria-label="btn group" style="float: right">
+                @if (Model.Any(a => a.Source.Uri == null))
+                {
+                    <button class="btn btn-light-green" type="button" data-toggle="modal" data-target="#CreateArticle">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Добавить новость
+                    </button>
+                }
+                <button class="btn btn-light-green" type="button" data-toggle="modal" data-target="#CreateMyChannel">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Добавить свой канал
+                </button>
+                <button class="btn btn-light-green" type="button" data-toggle="modal" data-target="#CreateFromUri">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Добавить из URL
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+
+    @if (@Model.Count == 0)
+    {
+        <div class="alert alert-info" role="alert">
+            Новостей пока нет. Добавьте источник RSS, чтобы увидеть новостную ленту.
+        </div>
+    }
+    else
+    {
+        <!--Шапка вкладок-->
+        <ul class="nav nav-tabs mb-3" id="RssTab" role="tablist">
+            @foreach (var rssGroupModel in Model)
+            {
+                if (index == 0)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link active"
+                           id="tabpanel-@rssGroupModel.Source.RssSourceGuid"
+                           data-toggle="tab" href="#id-@rssGroupModel.Source.RssSourceGuid"
+                           role="tab" aria-controls="tabpanel-@rssGroupModel.Source.RssSourceGuid"
+                           aria-selected="true">
+                            @rssGroupModel.Source.Title
+                        </a>
+                    </li>
+                    index = index + 1;
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           id="tabpanel-@rssGroupModel.Source.RssSourceGuid"
+                           data-toggle="tab" href="#id-@rssGroupModel.Source.RssSourceGuid"
+                           role="tab" aria-controls="tabpanel-@rssGroupModel.Source.RssSourceGuid"
+                           aria-selected="false">
+                            @rssGroupModel.Source.Title
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+
+        <!--Контент во вкладках-->
+        <div class="tab-content" id="RssTabContent">
+            @foreach (var rssGroupModel in Model)
+            {
+                if (otherIndex == 0)
+                {
+                    <div class="tab-pane fade show active"
+                         id="id-@rssGroupModel.Source.RssSourceGuid" role="tabpanel"
+                         aria-labelledby="tabpanel-@rssGroupModel.Source.RssSourceGuid">
+
+                        @if (@rssGroupModel.Source.Uri == null)
+                        {
+                            if (@rssGroupModel.Items.Count == 0)
+                            {
+                                <div class="alert alert-info" role="alert">
+                                    В канале "@rssGroupModel.Source.Title" нет новостей. Нажмите кнопку "Добавить новость", чтобы тут что-то появилось.
+                                </div>
+                            }
+                        }
+
+                        @foreach (var item in rssGroupModel.Items)
+                        {
+                            string itemPubDate = "";
+                            if (@item.PubDate.Day == DateTime.Today.Day)
+                            {
+                                itemPubDate = "сегодня в " + @item.PubDate.ToString("HH:mm");
+                            }
+                            else if (@item.PubDate + TimeSpan.FromDays(1) == DateTime.Today)
+                            {
+                                itemPubDate = "вчера в " + @item.PubDate.ToString("HH:mm");
+                            }
+                            else
+                            {
+                                var days = DateTime.Today.Day - item.PubDate.Day;
+                                
+                                itemPubDate = days.ToString() + " дней назад в " + @item.PubDate.ToString("HH:mm");
+                            }
+
+                            <div class="card mb-1">
+                                <div class="card-header">
+                                    <p class="card-text">Опубликовано @itemPubDate</p>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">@item.Title</h4>
+                                    <p class="card-text">@Html.Raw(HttpUtility.HtmlDecode(@item.Description))</p>
+                                    <a href="@item.Link" class="btn btn-light">Подробнее</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    otherIndex = otherIndex + 1;
+                }
+                else
+                {
+                    <div class="tab-pane fade"
+                         id="id-@rssGroupModel.Source.RssSourceGuid" role="tabpanel"
+                         aria-labelledby="tabpanel-@rssGroupModel.Source.RssSourceGuid">
+
+                        @if (@rssGroupModel.Source.Uri == null)
+                        {
+                            if (@rssGroupModel.Items.Count == 0)
+                            {
+                                <div class="alert alert-info" role="alert">
+                                    В канале "@rssGroupModel.Source.Title" нет новостей. Нажмите кнопку "Добавить новость", чтобы тут что-то появилось.
+                                </div>
+                            }
+                        }
+
+                        @foreach (var item in rssGroupModel.Items)
+                        {
+                            if (item.RssSourceGuid == rssGroupModel.Source.RssSourceGuid)
+                            {
+                                string itemPubDate = "";
+                                if (@item.PubDate.Day == DateTime.Today.Day)
+                                {
+                                    itemPubDate = "сегодня в " + @item.PubDate.ToString("HH:mm");
+                                }
+                                else
+                                {
+                                    itemPubDate = "вчера в " + @item.PubDate.ToString("HH:mm");
+                                }
+
+                                <div class="card mb-1">
+                                    <div class="card-header">
+                                        <p class="card-text">Дата публикации: @itemPubDate</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">@item.Title</h4>
+                                        <p class="card-text">@Html.Raw(HttpUtility.HtmlDecode(@item.Description))</p>
+                                        <a href="@item.Link" class="btn btn-light">Подробнее</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            }
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="CreateFromUri" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info modal-full-height modal-top" role="document">
+        <div class="modal-content">
+            <form method="post" asp-controller="Rss" asp-action="AddSource" class="needs-validation" novalidate>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Добавление источника RSS из URI</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                        <i class="fa fa-external-link-square prefix grey-text"></i>
+                        <input type="text" name="uri" class="form-control validate" required="">
+                        <label data-error="wrong" data-success="right" for="uri">Ссылка</label>
+                        <div class="valid-tooltip">
+                            Верно!
+                        </div>
+                        <div class="invalid-tooltip">
+                            Значение не может быть пустым
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <div class="row">
+                        <button class="btn btn-warning" type="button" data-dismiss="modal">Отменить</button>
+                        <button type="submit" class="btn btn-info">СОХРАНИТЬ</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CreateMyChannel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info modal-full-height modal-top" role="document">
+        <div class="modal-content">
+            <form method="post" asp-controller="Rss" asp-action="AddMySource" class="needs-validation" novalidate>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Добавление личного RSS-канала</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                        <i class="fa fa-external-link-square prefix grey-text"></i>
+                        <input type="text" name="name" class="form-control validate" required="">
+                        <label data-error="wrong" data-success="right" for="name">Название</label>
+                        <div class="valid-tooltip">
+                            Верно!
+                        </div>
+                        <div class="invalid-tooltip">
+                            Значение не может быть пустым
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <div class="row">
+                        <button class="btn btn-warning" type="button" data-dismiss="modal">Отменить</button>
+                        <button type="submit" class="btn btn-info">Сохранить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CreateArticle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info modal-top" role="document">
+        <div class="modal-content">
+            <form method="post" asp-controller="Rss" asp-action="AddArticle" class="needs-validation" novalidate>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Добавление новости</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+
+                    <select class="form-control mysearch" id="source-dropdown" name="rsssourceguid" required>
+                        <option value="">Выберите канал</option>
+                        @foreach (var item in @Model.Where(@a => a.Source.Uri == null).ToList())
+                        {
+                            <option value="@item.Source.RssSourceGuid">@item.Source.Title</option>
+                        }
+                    </select>
+                    <div class="valid-tooltip">
+                        Верно!
+                    </div>
+                    <div class="invalid-tooltip">
+                        Выберите один пункт из выпадающего списка
+                    </div>
+
+                    <div class="md-form mb-5">
+                        <i class="fa fa-external-link-square prefix grey-text"></i>
+                        <input type="text" name="title" class="form-control validate" required="">
+                        <label for="title">Заголовок</label>
+                        <div class="valid-tooltip">
+                            Верно!
+                        </div>
+                        <div class="invalid-tooltip">
+                            Значение не может быть пустым
+                        </div>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fa fa-external-link-square prefix grey-text"></i>
+                        <textarea type="text" id="description" name="description" class="md-textarea form-control" rows="4" required></textarea>
+                        <label for="description">Название</label>
+                        <div class="valid-tooltip">
+                            Верно!
+                        </div>
+                        <div class="invalid-tooltip">
+                            Значение не может быть пустым
+                        </div>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fa fa-external-link-square prefix grey-text"></i>
+                        <input type="text" name="link" class="form-control validate" required="">
+                        <label for="link">Ссылка на источник</label>
+                        <div class="valid-tooltip">
+                            Верно!
+                        </div>
+                        <div class="invalid-tooltip">
+                            Значение не может быть пустым
+                        </div>
+                    </div>
+                    <div class="md-form mb-5">
+                        <i class="fa fa-external-link-square prefix grey-text"></i>
+                        <input type="text" name="enclosure" class="form-control">
+                        <label for="enclosure">Ссылка на изображение</label>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <div class="row">
+                        <button class="btn btn-warning" type="button" data-dismiss="modal">Отменить</button>
+                        <button type="submit" class="btn btn-info">Сохранить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load',
+            function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms,
+                    function(form) {
+                        form.addEventListener('submit',
+                            function(event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            },
+                            false);
+                    });
+            },
+            false);
+    })();
+</script>
+<script>
+    $('.collapse').collapse()
+</script>
