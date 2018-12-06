@@ -1,0 +1,10 @@
+@model System.Collections.Generic.List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>
+
+<select id="author-dropdown" name="authors" class="form-control mysearch">
+    <option>Выберите автора</option>
+
+    @foreach (var item in Model)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+</select>
