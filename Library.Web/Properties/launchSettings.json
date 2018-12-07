@@ -18,7 +18,7 @@
     "Library.Web": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://*:4400",
+      "applicationUrl": "http://*:80",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
