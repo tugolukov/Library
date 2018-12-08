@@ -46,6 +46,10 @@ namespace Library.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Страница "Полезные ссылки"
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("links")]
         public IActionResult Links()
         {
@@ -64,6 +68,10 @@ namespace Library.Web.Controllers
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
         
+        /// <summary>
+        /// Файл для поисковых роботов
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("robots.txt")]
         public ContentResult RobotsText()
         {
@@ -78,6 +86,10 @@ namespace Library.Web.Controllers
             return this.Content(stringBuilder.ToString(), "text/plain", Encoding.UTF8);
         }
     
+        /// <summary>
+        /// Карта сайта
+        /// </summary>
+        /// <returns></returns>
         [Route("sitemap.xml")]
         [HttpGet]
         public ContentResult SitemapXml()
