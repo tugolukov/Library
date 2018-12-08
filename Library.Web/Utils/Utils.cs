@@ -9,8 +9,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Library.Web.Utils
 {
+    /// <summary>
+    /// Утилиты преобразования типов
+    /// </summary>
     public static class Utils
     {
+        #region ToSelectListItems
+
+        /// <summary>
+        /// Получение данных для выпадающего списка
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public static List<SelectListItem> ToSelectListItems(this List<AuthorModel> items)
         {
             List<SelectListItem> result = new List<SelectListItem>();
@@ -28,6 +38,11 @@ namespace Library.Web.Utils
             return result;
         }
 
+        /// <summary>
+        /// Получение данных для выпадающего списка
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public static List<SelectListItem> ToSelectListItems(this List<TechnologyModel> items)
         {
             List<SelectListItem> result = new List<SelectListItem>();
@@ -45,6 +60,11 @@ namespace Library.Web.Utils
             return result;
         }
 
+        /// <summary>
+        /// Получение данных для выпадающего списка
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public static List<SelectListItem> ToSelectListItems(this List<PublishingModel> items)
         {
             List<SelectListItem> result = new List<SelectListItem>();
@@ -62,7 +82,11 @@ namespace Library.Web.Utils
             return result;
         }
 
-        /// <summary>
+        #endregion
+
+        #region GetDescriptionTags
+
+         /// <summary>
         /// Получение описания для книги
         /// </summary>
         /// <param name="model"></param>
@@ -184,5 +208,7 @@ namespace Library.Web.Utils
         {
             return String.Join(' ', strings);
         }
+
+        #endregion
     }
 }
