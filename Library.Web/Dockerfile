@@ -12,6 +12,6 @@ COPY wwwroot/ /wwwroot
 WORKDIR /app
 ARG Environment=Work
 ENV ASPNETCORE_ENVIRONMENT $Environment
-ENV ASPNETCORE_URLS http://*:80
-EXPOSE 80
+ENV ASPNETCORE_URLS http://*:5000
+EXPOSE 5000
 ENTRYPOINT ["dotnet", "Library.Web.dll"] 

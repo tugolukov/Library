@@ -6,6 +6,24 @@ networks:
   proxy:
     external: true
 services:
+  library-nginx:
+    image: library-nginx:work
+    build:
+      context: ./Nginx
+      args:
+      - Environment=Work
+    restart: always
+    deploy:
+      labels:
+      - traefik.backend=library
+      - traefik.frontend.rule=HostRegexp:itlibrary.site,{subdomain:[a-z]+}.itlibrary.site
+      - traefik.docker.network=proxy
+      - traefik.port=4400
+    networks:
+    - default
+    - proxy
+    depends_on:
+    - library
   database:
     image: postgres:latest
     restart: always
@@ -16,3 +34,21 @@ services:
     - 5430:5432
     volumes:
     - database:/var/lib/postgresql/data
+  celsus-personarea:
+    image: library:work
+    build:
+      context: ./Library.Web
+      args:
+        Environment: Work
+    restart: always
+    depends_on:
+    - database
+    networks:
+    - proxy
+    - default
+    deploy:
+      labels:
+      - "com.docker.stack.image=library:work"
+      - "com.docker.stack.namespace=library"
+    ports:
+    - 4400:5000
