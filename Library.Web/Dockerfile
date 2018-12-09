@@ -2,6 +2,10 @@ FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
 ARG source
 
+#build
+FROM microsoft/dotnet:2.2-sdk as build
+WORKDIR /app
+
 # Copy csproj and restore as distinct layers
 COPY *.csproj ./
 RUN dotnet restore
@@ -10,9 +14,7 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Release -o out
 
-#build
-FROM microsoft/dotnet:2.2-sdk as build
-WORKDIR /app
+
 COPY /bin/Release/publish .
 COPY wwwroot/ /wwwroot
 
