@@ -158,7 +158,7 @@ namespace Library.Domain.Services
                     {
                         createBookModel.NumberOfPages = Convert.ToInt32(book.NumberOfPages);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         createBookModel.NumberOfPages = 0;
                     }
@@ -171,7 +171,7 @@ namespace Library.Domain.Services
                     {
                         createBookModel.Year = Convert.ToInt32(book.Year);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         createBookModel.Year = 2019;
                     }
