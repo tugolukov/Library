@@ -40,6 +40,7 @@ namespace Library.Web.Controllers
         public async Task<IActionResult> ReadAll(int page = 1)
         {
             var result = await _booksService.ReadPage(page);
+            ViewBag.description = "книги программирование авторы список";
             return View(result);
         }
 
@@ -47,6 +48,7 @@ namespace Library.Web.Controllers
         public async Task<IActionResult> Read([FromRoute] Guid guid)
         {
             var result = await _booksService.Read(guid);
+            ViewBag.description = result.GetDescriptionTags();
             return View(result);
         }
 

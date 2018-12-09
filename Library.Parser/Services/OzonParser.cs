@@ -52,7 +52,7 @@ namespace Library.Parser.Services
         /// </summary>
         /// <param name="uri">Ссылка на книгу</param>
         /// <returns></returns>
-        private async Task ParseBook(string uri)
+        private Task ParseBook(string uri)
         {
             var root = GetRootNode(uri);
             //CreateBookModel createBookModel = new CreateBookModel();
@@ -74,7 +74,7 @@ namespace Library.Parser.Services
 //                    createBookModel.Format = format.Format;
                 }
             }
-            return;
+            return null;
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Library.Parser.Services
                     description = node.Descendants()
                         .Where(d => d.GetAttributeValue("itemprop", "").Equals("description")).ToList().First().InnerHtml;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     description = "Информация об авторе отсутствует.";
                 }
@@ -145,7 +145,7 @@ namespace Library.Parser.Services
                 response = request.GetResponse();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 request = WebRequest.Create(uri + "?store=1%2c0&group=div_book");
                 request.Method = "GET";

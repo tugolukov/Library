@@ -14,6 +14,15 @@ namespace Library.Web.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
+            ViewBag.description = "В настоящее время существует множество решений для учета электронных " +
+                                  " библиотек, как личных, так и корпоративных. Зачастую эти решения либо слишком дорогие" +
+                                  " и не оправдывают свою стоимость, либо предоставляют недостаточно полный и удобный" +
+                                  " функционал. Также в большинстве решений отсутствует возможность структурировать" +
+                                  " данные о профессиональной литературе." +
+                                  " В данной работе будет сделана попытка объединить возможности ввода, " +
+                                  " редактирования информации, удобного поиска и просмотра информации о " +
+                                  " профессиональной литературе. В качестве профиля литературы выбрана IT-сфера, так как" +
+                                  " количество литературы в этой сфере растет очень быстро.";
             return View();
         }
         
@@ -37,6 +46,10 @@ namespace Library.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Страница "Полезные ссылки"
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("links")]
         public IActionResult Links()
         {
@@ -55,19 +68,28 @@ namespace Library.Web.Controllers
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
         
+        /// <summary>
+        /// Файл для поисковых роботов
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("robots.txt")]
         public ContentResult RobotsText()
         {
             StringBuilder stringBuilder = new StringBuilder();
         
-            stringBuilder.AppendLine("user-agent: *");
+            stringBuilder.AppendLine("user-agent: Yandex");
             stringBuilder.AppendLine("disallow: /error/");
+            stringBuilder.AppendLine("disallow: /books/delete/");
             stringBuilder.AppendLine("allow: /error/foo");
             stringBuilder.AppendLine("sitemap: http://itlibrary.site/sitemap.xml");
         
             return this.Content(stringBuilder.ToString(), "text/plain", Encoding.UTF8);
         }
     
+        /// <summary>
+        /// Карта сайта
+        /// </summary>
+        /// <returns></returns>
         [Route("sitemap.xml")]
         [HttpGet]
         public ContentResult SitemapXml()

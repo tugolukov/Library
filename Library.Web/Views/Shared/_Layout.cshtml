@@ -6,6 +6,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Библиотека</title>
 
+    <meta name="description" content="@ViewBag.description">
+    
     @* itlibrary.site *@
     <meta name="yandex-verification" content="641bcfa6debc67a3" /> 
     @* itlibrary.ru.com *@
@@ -70,22 +72,6 @@
 </head>
 <body>
 <header>
-    <!-- Rating@Mail.ru counter -->
-    <script type="text/javascript">
-        var _tmr = window._tmr || (window._tmr = []);
-        _tmr.push({id: "3070975", type: "pageView", start: (new Date()).getTime()});
-        (function (d, w, id) {
-            if (d.getElementById(id)) return;
-            var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
-            ts.src = "https://top-fwz1.mail.ru/js/code.js";
-            var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
-            if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
-        })(document, window, "topmailru-code");
-    </script><noscript><div>
-        <img src="https://top-fwz1.mail.ru/counter?id=3070975;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
-    </div></noscript>
-    <!-- //Rating@Mail.ru counter -->
-
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 sticky-top" id="top-section">
         <div class="container-fluid">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
@@ -193,13 +179,6 @@
                 <img src="https://informer.yandex.ru/informer/51361246/3_0_ECECECFF_CCCCCCFF_0_pageviews"
                      style="width: 88px; height: 40px; border: 0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="51361246" data-lang="ru"/></a>
             <!-- /Yandex.Metrika informer -->
-        </span>
-        <span>
-            <!-- Rating@Mail.ru logo -->
-            <a href="https://top.mail.ru/jump?from=3070975">
-                <img src="https://top-fwz1.mail.ru/counter?id=3070975;t=556;l=1" style="border:0;" height="40" width="88" alt="Top.Mail.Ru" /></a>
-            <!-- //Rating@Mail.ru logo -->
-
         </span>
     </div>
     <!-- Footer Links -->
