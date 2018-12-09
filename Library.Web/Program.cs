@@ -20,8 +20,17 @@ namespace Library.Web
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var host = BuildWebHost(args)
-                .MigrateDatabase<DatabaseContext>();
+            var host = BuildWebHost(args);
+
+            try
+            {
+                host.MigrateDatabase<DatabaseContext>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+  
             host.Run();
         }
 
