@@ -1,5 +1,4 @@
-version: "3.1"
-
+version: "3"
 volumes:
   database:
     driver: local
@@ -9,7 +8,6 @@ networks:
 services:
   database:
     image: postgres:latest
-    container_name: database
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -18,8 +16,8 @@ services:
     - 5430:5432
     volumes:
     - database:/var/lib/postgresql/data
-  library:
-    image: library:work
+  celsus-personarea:
+    image: 130.193.35.45/library:work
     build:
       context: ./Library.Web
       args:
@@ -32,7 +30,7 @@ services:
     - default
     deploy:
       labels:
-      - "com.docker.stack.image=library:work"
+      - "com.docker.stack.image=130.193.35.45/library:work"
       - "com.docker.stack.namespace=library"
     ports:
-    - 5000:80
+    - 4400:80
