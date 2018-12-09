@@ -36,17 +36,3 @@ services:
       - "com.docker.stack.namespace=library"
     ports:
     - 5000:80
-  pgadmin:
-    container_name: pgadmin_container
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: tugolukov40@yandex.ru
-      PGADMIN_DEFAULT_PASSWORD: 123456
-    volumes:
-    - pgadmin:/root/.pgadmin
-    ports:
-    - 4000:80
-    networks:
-    - proxy
-    - default
-    restart: unless-stopped
