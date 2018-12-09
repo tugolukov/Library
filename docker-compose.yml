@@ -16,7 +16,7 @@ services:
     - 5430:5432
     volumes:
     - database:/var/lib/postgresql/data
-  celsus-personarea:
+  library:
     image: 130.193.35.45/library:work
     build:
       context: ./Library.Web
