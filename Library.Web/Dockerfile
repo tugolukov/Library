@@ -5,7 +5,6 @@ ARG source
 #build
 FROM microsoft/dotnet:2.2-sdk as build
 WORKDIR /app
-RUN dotnet publish --output bin/Release/publish
 COPY /bin/Release/publish .
 COPY wwwroot/ /wwwroot
 
