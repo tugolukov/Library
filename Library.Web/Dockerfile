@@ -3,7 +3,7 @@ WORKDIR /app
 ARG source
 
 #build
-FROM microsoft/dotnet:2.1-sdk as build
+FROM microsoft/dotnet:2.2-sdk as build
 WORKDIR /app
 COPY /bin/Release/publish .
 COPY wwwroot/ /wwwroot
