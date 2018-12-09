@@ -9,7 +9,7 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 
 # Copy everything else and build
-RUN dotnet publish --output bin/Release/publish
+RUN dotnet publish --framework netcoreapp2.2 --configuration Release --verbosity normal --output bin/Release/publish
 
 
 COPY /bin/Release/publish .
