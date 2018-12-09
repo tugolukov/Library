@@ -83,7 +83,7 @@ namespace Library.Domain.Services
             return result;
         }
 
-        public async Task<List<BookModel>> Search(string search)
+        public Task<List<BookModel>> Search(string search)
         {
             throw new NotImplementedException();
         }
