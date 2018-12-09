@@ -16,6 +16,14 @@
     }
 
     .btn { border-radius: 10px; }
+    
+    .cardnullround {
+        border-radius: 0;
+    }
+    
+    .nav-pills > li > a.active {
+        background-color: slategrey!important;
+    }
 </style>
 
 <div class="container">
@@ -26,16 +34,17 @@
             RSS-контента, а также с большим количеством источников.
         </p>
         <hr>
-        <p class="mb-0">Обновление происходит в фоновом режиме, поэтому вы можете дальше пользоваться сайтом, а мы загрузим свежие новости! Приятного пользования! :)</p>
+        <p class="mb-0">Чтобы ознакомиться с инструкцией пользования этой страницей, нажмите на заголовок "RSS-Новости". Приятного использования :)</p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="row">
         <div class="col-sm-4">
-            <h2 align="left">RSS-Новости</h2>
+            <a data-toggle="collapse" href="#rsscollapse" aria-expanded="false" aria-controls="rsscollapse" style="color: black">
+                <h2 align="left" data-toggle="tooltip" data-placement="left" title="Нажмите, чтобы увидеть инструкцию">RSS-Новости</h2>
+            </a>
         </div>
-
         <div class="col-sm-8">
             <div class="btn-group" role="group" aria-label="btn group" style="float: right">
                 @if (Model.Any(a => a.Source.Uri == null))
@@ -56,9 +65,104 @@
             </div>
         </div>
     </div>
+    
+    <div class="collapse" id="rsscollapse">
+        <hr>
+        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-mychannel-tab" data-toggle="pill" href="#pills-mychannel" role="tab"
+                   aria-controls="pills-mychannel" aria-selected="true">
+                    Свои каналы
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-otherchannel-tab" data-toggle="pill" href="#pills-otherchannel" role="tab"
+                   aria-controls="pills-otherchannel" aria-selected="false">
+                    Сторонние каналы
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-allrules-tab" data-toggle="pill" href="#pills-allrules" role="tab"
+                   aria-controls="pills-allrules" aria-selected="false">
+                    Общие сведения
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content pt-2 pl-1" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-mychannel" role="tabpanel" aria-labelledby="pills-mychannel-tab">
+                <div class="card-group">            
+                    <div class="card cardnullround">
+                        <div class="card-body">
+                            <h6 class="card-title">Как добавить свой канал?</h6>
+                            <p class="card-text">Нажмите на кнопку "Добавить свой канал" и в открывшемся модальном окне введите название канала.</p>
+                        </div>                
+                    </div>                
+                    <div class="card cardnullround">
+                        <div class="card-body">
+                            <h6 class="card-title">Как добавить новость в свой канал?</h6>
+                            <p class="card-text">
+                                <li class="dark-grey-text">Если свой канал уже создан, то справа от заголовка страницы появится еще одна кнопка "Добавить новость".</li>
+                                <li class="dark-grey-text">Нажмите на эту кнопку.</li>
+                                <li class="dark-grey-text">В открывшемся модальном окне выберите свой канал (их может быть несколько) и заполните форму.</li>
+                                <li class="dark-grey-text">После нажатия кнопки "Добавить" страница перезагрузится, а ваша новость будет добавлена в канал.</li>
+                            </p>                
+                        </div>                
+                    </div>                
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-otherchannel" role="tabpanel" aria-labelledby="pills-otherchannel-tab">
+                <div class="card-group">            
+                    <div class="card cardnullround">
+                        <div class="card-body">
+                            <h6 class="card-title">Какие могут быть источники?</h6>
+                            <p class="card-text">URL должны содержать ссылку на XML-страницу с генерируемыми новостями.</p>
+                            <a role="button" class="btn btn-primary btn-md" href="https://news.yandex.ru/computers.rss">Пример</a>
+                        </div>                
+                    </div>                
+                    <div class="card cardnullround">
+                        <div class="card-body">
+                            <h6 class="card-title">Как добавить сторонний источник?</h6>
+                            <p class="card-text">Нажмите на кнопку "Добавить из URL" и в открывшемся модальном окне введите URL источника новостей</p>                
+                        </div>                
+                    </div>                
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-allrules" role="tabpanel" aria-labelledby="pills-allrules-tab">
+                <div class="card cardnullround">
+                    <div class="card-body">
+                        На этой странице представлен функционал работы с RSS-источниками. Все источники разделены по вкладкам,
+                        что позволяет не терять нужные новости из внимания. Далее описаны основные возможности работы с RSS.                    
+                    </div>
+                </div>
+                <div class="card-group">
+                    <div class="card cardnullround">
+                        <div class="card-body">
+                            <h6 class="card-title">Добавление каналов</h6>
+                            <p class="card-text">Вы можете создать свои каналы для добавления новостей.</p>
+                        </div>
+                    </div>
+                    <div class="card cardnullround">
+                        <div class="card-body">
+                            <h6 class="card-title">Добавление новостей</h6>
+                            <p class="card-text">Если свой канал уже создан, появляется возможность добавления новостей в эти каналы.
+                                В каналы из сторонних источников свои новости добавить нельзя.</p>
+                        </div>
+                    </div>
+                    <div class="card cardnullround">
+                        <div class="card-body">
+                            <h6 class="card-title">Сторонние источники</h6>
+                            <p class="card-text">Вы можете добавить сторонние источники RSS-контента, введя URL в форму ввода. Каждый из источников
+                                будет отображаться в отдельной вкладке.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <hr>
-
-
+    
+    
     @if (@Model.Count == 0)
     {
         <div class="alert alert-info" role="alert">
@@ -98,7 +202,7 @@
                 }
             }
         </ul>
-
+    
         <!--Контент во вкладках-->
         <div class="tab-content" id="RssTabContent">
             @foreach (var rssGroupModel in Model)
@@ -108,7 +212,7 @@
                     <div class="tab-pane fade show active"
                          id="id-@rssGroupModel.Source.RssSourceGuid" role="tabpanel"
                          aria-labelledby="tabpanel-@rssGroupModel.Source.RssSourceGuid">
-
+    
                         @if (@rssGroupModel.Source.Uri == null)
                         {
                             if (@rssGroupModel.Items.Count == 0)
@@ -118,7 +222,7 @@
                                 </div>
                             }
                         }
-
+    
                         @foreach (var item in rssGroupModel.Items)
                         {
                             string itemPubDate = "";
@@ -133,10 +237,10 @@
                             else
                             {
                                 var days = DateTime.Today.Day - item.PubDate.Day;
-                                
+    
                                 itemPubDate = days.ToString() + " дней назад в " + @item.PubDate.ToString("HH:mm");
                             }
-
+    
                             <div class="card mb-1">
                                 <div class="card-header">
                                     <p class="card-text">Опубликовано @itemPubDate</p>
@@ -156,7 +260,7 @@
                     <div class="tab-pane fade"
                          id="id-@rssGroupModel.Source.RssSourceGuid" role="tabpanel"
                          aria-labelledby="tabpanel-@rssGroupModel.Source.RssSourceGuid">
-
+    
                         @if (@rssGroupModel.Source.Uri == null)
                         {
                             if (@rssGroupModel.Items.Count == 0)
@@ -166,7 +270,7 @@
                                 </div>
                             }
                         }
-
+    
                         @foreach (var item in rssGroupModel.Items)
                         {
                             if (item.RssSourceGuid == rssGroupModel.Source.RssSourceGuid)
@@ -180,7 +284,7 @@
                                 {
                                     itemPubDate = "вчера в " + @item.PubDate.ToString("HH:mm");
                                 }
-
+    
                                 <div class="card mb-1">
                                     <div class="card-header">
                                         <p class="card-text">Дата публикации: @itemPubDate</p>
