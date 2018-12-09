@@ -9,8 +9,7 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 
 # Copy everything else and build
-COPY .. ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish --output bin/Release/publish
 
 
 COPY /bin/Release/publish .
