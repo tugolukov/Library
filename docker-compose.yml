@@ -18,7 +18,7 @@ services:
       - traefik.backend=library
       - traefik.frontend.rule=HostRegexp:itlibrary.site,{subdomain:[a-z]+}.itlibrary.site
       - traefik.docker.network=proxy
-      - traefik.port=4400
+      - traefik.port=80
     networks:
     - default
     - proxy
@@ -51,4 +51,4 @@ services:
       - "com.docker.stack.image=library:work"
       - "com.docker.stack.namespace=library"
     ports:
-    - 4400:5000
+    - 80:5000
