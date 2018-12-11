@@ -23,5 +23,22 @@ namespace Library.Database.Models.RSS
         /// Адрес
         /// </summary>
         public string Uri { get; set; }
+        
+        public RssSource(){}
+
+        public RssSource(string uri, string title)
+        {
+            RssSourceGuid = Guid.NewGuid();
+            Title = title;
+            Uri = uri;
+        }
+
+        public RssSource(string title)
+        {
+            RssSourceGuid = Guid.NewGuid();
+            Title = title;
+            Uri = null;
+        }
+        
     }
 }

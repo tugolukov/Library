@@ -224,30 +224,19 @@
                         }
     
                         @foreach (var item in rssGroupModel.Items)
-                        {
-                            string itemPubDate = "";
-                            if (@item.PubDate.Day == DateTime.Today.Day)
-                            {
-                                itemPubDate = "сегодня в " + @item.PubDate.ToString("HH:mm");
-                            }
-                            else if (@item.PubDate + TimeSpan.FromDays(1) == DateTime.Today)
-                            {
-                                itemPubDate = "вчера в " + @item.PubDate.ToString("HH:mm");
-                            }
-                            else
-                            {
-                                var days = DateTime.Today.Day - item.PubDate.Day;
-    
-                                itemPubDate = days.ToString() + " дней назад в " + @item.PubDate.ToString("HH:mm");
-                            }
-    
+                        {   
                             <div class="card mb-1">
-                                <div class="card-header">
-                                    <p class="card-text">Опубликовано @itemPubDate</p>
-                                </div>
+                                @if (@item.PubDateString != null)
+                                {
+                                    <div class="card-header">
+                                        <p class="card-text">Опубликовано @item.PubDateString</p>
+                                    </div>
+                                }
                                 <div class="card-body">
                                     <h4 class="card-title">@item.Title</h4>
                                     <p class="card-text">@Html.Raw(HttpUtility.HtmlDecode(@item.Description))</p>
+                                </div>
+                                <div class="card-footer">
                                     <a href="@item.Link" class="btn btn-light">Подробнее</a>
                                 </div>
                             </div>
@@ -275,23 +264,18 @@
                         {
                             if (item.RssSourceGuid == rssGroupModel.Source.RssSourceGuid)
                             {
-                                string itemPubDate = "";
-                                if (@item.PubDate.Day == DateTime.Today.Day)
-                                {
-                                    itemPubDate = "сегодня в " + @item.PubDate.ToString("HH:mm");
-                                }
-                                else
-                                {
-                                    itemPubDate = "вчера в " + @item.PubDate.ToString("HH:mm");
-                                }
-    
                                 <div class="card mb-1">
-                                    <div class="card-header">
-                                        <p class="card-text">Дата публикации: @itemPubDate</p>
-                                    </div>
+                                    @if (@item.PubDateString != null)
+                                    {
+                                        <div class="card-header">
+                                            <p class="card-text">Опубликовано @item.PubDateString</p>
+                                        </div>
+                                    }
                                     <div class="card-body">
                                         <h4 class="card-title">@item.Title</h4>
                                         <p class="card-text">@Html.Raw(HttpUtility.HtmlDecode(@item.Description))</p>
+                                    </div>
+                                    <div class="card-footer">
                                         <a href="@item.Link" class="btn btn-light">Подробнее</a>
                                     </div>
                                 </div>

@@ -11,39 +11,27 @@ namespace Library.Domain.Interfaces
         /// Получение всех новостей для отображения во вкладках
         /// </summary>
         /// <returns></returns>
-        Task<List<RssGroupModel>> GetAllGroups();
+        Task<List<RssGroupModel>> GetSources();
 
         /// <summary>
-        /// Получение всех публикаций
+        /// Добавление источника из URL
         /// </summary>
+        /// <param name="uri">URL источника</param>
         /// <returns></returns>
-        Task<List<RssItemModel>> GetAll();
+        Task<Guid> AddSourceWithUrl(string uri);
 
         /// <summary>
-        /// Добавление источника
+        /// Добавление своего канала
         /// </summary>
-        /// <param name="uri"></param>
+        /// <param name="name">Название канала</param>
         /// <returns></returns>
-        Task<Guid> AddSource(string uri);
+        Task<Guid> AddSourceWithoutUrl(string name);
 
-        /// <summary>
-        /// Добавление источника
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <returns></returns>
-        Task<Guid> AddMySource(string name);
-        
         /// <summary>
         /// Добавление новости
         /// </summary>
-        /// <param name="uri"></param>
+        /// <param name="item">Новость</param>
         /// <returns></returns>
         Task<Guid> AddItem(RssItemModel item);
-        
-        /// <summary>
-        /// Обновить публикациии из источников
-        /// </summary>
-        /// <returns></returns>
-        Task Update();
     }
 }
