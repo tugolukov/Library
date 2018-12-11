@@ -234,6 +234,10 @@
                             {
                                 itemPubDate = "вчера в " + @item.PubDate.ToString("HH:mm");
                             }
+                            else if (@item.PubDate == null)
+                            {
+                                itemPubDate = "Дата публикации не указана";
+                            }
                             else
                             {
                                 var days = DateTime.Today.Day - item.PubDate.Day;

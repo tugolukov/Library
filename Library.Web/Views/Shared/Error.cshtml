@@ -1,10 +1,10 @@
 ﻿@model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Ошибка";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h1 class="text-danger">Ошибка.</h1>
+<h2 class="text-danger">При выполнении запроса на сервер произошла ошибка. Администраторы уже в курсе событий и работают над исправлением ошибок.</h2>
 
 @if (Model.ShowRequestId)
 {
@@ -13,13 +13,13 @@
     </p>
 }
 
-<h3>Development Mode</h3>
+<h3>Режим разработчика</h3>
 <p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
+    Переключите режим работы приложения на <strong>Development</strong> для детального отображения текста ошибки.
 </p>
 <p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
+    <strong>Режим разработки не должен быть включен для развернутых приложений.</strong>
+    Это может привести к отображению конфиденциальной информации от исключений для конечных пользователей.
+    Для локальной отладки включите режим <strong>Development</strong> задав для переменной <strong>ASPNETCORE_ENVIRONMENT</strong> значение <strong>Development</strong>
+    и перезапустите приложение.
 </p>

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Library.Domain
 {
-    public static class ServicesExtentions
+    public static class ServicesExtensions
     {
         public static IServiceCollection AddDomain(this IServiceCollection services)
         {

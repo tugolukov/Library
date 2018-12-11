@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using AutoMapper;
+using CodeHollow.FeedReader;
 using Library.Database;
 using Library.Database.Models.RSS;
 using Library.Domain.Interfaces;
@@ -12,7 +13,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.Domain.Services
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Сервис для работы с RSS
+    /// </summary>
     public class RssService : IRssService
     {
         private readonly DatabaseContext _context;
@@ -20,180 +23,147 @@ namespace Library.Domain.Services
 
         public RssService(DatabaseContext context, IMapper mapper)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);   
             _context = context;
             _mapper = mapper;
         }
-
+        
         /// <inheritdoc />
-        public async Task<List<RssGroupModel>> GetAllGroups()
+        public async Task<List<RssGroupModel>> GetSources()
         {
-            var sources = await _context.RssSources.ToListAsync();
-            List<RssGroupModel> results = new List<RssGroupModel>();
+            await Update();
+            List<RssGroupModel> result = new List<RssGroupModel>();
             
+            var sources = await _context.RssSources.ToListAsync();
             foreach (var source in sources)
             {
-                var guid = source.RssSourceGuid;
-                List<RssItemModel> items = new List<RssItemModel>();
-                if (source.Uri != null)
-                {
-                    items = await GetFromUri(source.Uri);
-                }
-                else
-                {
-                    var itemsModel = await _context.RssItems.Where(a => a.RssSourceGuid == source.RssSourceGuid).ToListAsync();
-                    items = _mapper.Map<List<RssItem>, List<RssItemModel>>(itemsModel);
-                }
                 var group = new RssGroupModel()
                 {
-                    Source = _mapper.Map<RssSourceModel>(source),
-                    Items = items.Take(15).ToList()
+                    Items = await GetItems(source.RssSourceGuid),
+                    Source = _mapper.Map<RssSourceModel>(source)
                 };
                 
-                results.Add(group);
+                result.Add(group);
             }
-
-            return results;
+            
+            return result;
         }
 
         /// <inheritdoc />
-        public async Task<List<RssItemModel>> GetAll()
+        public async Task<Guid> AddSourceWithUrl(string uri)
         {
-            var items = await _context.RssItems.ToListAsync();
-            return _mapper.Map<List<RssItem>, List<RssItemModel>>(items);        
+            return await AddSourceFromUri(uri);
         }
 
         /// <inheritdoc />
-        public async Task<Guid> AddSource(string uri)
+        public async Task<Guid> AddSourceWithoutUrl(string name)
         {
-            RssSource source = new RssSourceModel()
-            {
-                RssSourceGuid = Guid.NewGuid(),
-                Title = GetTitleFromUri(uri),
-                Uri = uri
-            };
-            
-            _context.RssSources.Add(source);
-            await _context.SaveChangesAsync();
-
-            AddNewItems(uri, XDocument.Load(uri));
-            
-            return source.RssSourceGuid;
+            return await AddEmptySource(name);
         }
 
-        public async Task<Guid> AddMySource(string name)
-        {
-            RssSource source = new RssSourceModel()
-            {
-                RssSourceGuid = Guid.NewGuid(),
-                Title = name,
-                Uri = null
-            };
-            
-            _context.RssSources.Add(source);
-            await _context.SaveChangesAsync();
-
-            return source.RssSourceGuid;
-        }
-
+        /// <inheritdoc />
         public async Task<Guid> AddItem(RssItemModel item)
         {
             RssItem rssItem = _mapper.Map<RssItemModel>(item);
             _context.RssItems.Add(rssItem);
             await _context.SaveChangesAsync();
-            return item.RssItemGuid;
+            return item.RssItemGuid;        
         }
 
-        /// <inheritdoc />
-        public async Task Update()
+        /// <summary>
+        /// Обновить все источники
+        /// </summary>
+        /// <returns></returns>
+        private async Task Update()
         {
-            var sources = await _context.RssSources.ToListAsync();
+            var sources = await _context.RssSources.Where(a => a.Uri != null).ToListAsync();
             foreach (var source in sources)
             {
-                try
-                {
-                    await AddNewItems(source.Uri, XDocument.Load(source.Uri));
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
+                await Update(source);
             }
         }
 
-        private string GetTitleFromUri(string uri)
+        /// <summary>
+        /// Обновить источник по идентификатору
+        /// </summary>
+        /// <param name="source">Источник</param>
+        /// <returns></returns>
+        private async Task Update(RssSource source)
         {
-            try
-            {
-                XDocument doc = XDocument.Load(uri);
-                return doc.Root.Descendants("channel").Elements("title").FirstOrDefault().Value;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return null;
-            }
-        }
-        
-        private async Task<List<RssItemModel>> GetFromUri(string uri)
-        {
-            try
-            {
-                var source = await _context.RssSources.SingleOrDefaultAsync(a => a.Uri == uri);
-                var items = await _context.RssItems.Where(a => a.RssSourceGuid == source.RssSourceGuid).OrderByDescending(a => a.PubDate).ToListAsync();
-                
-                return _mapper.Map<List<RssItem>, List<RssItemModel>>(items);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return null;
-            }
-        }
-
-        private async Task AddNewItems(string uri, XDocument doc)
-        {
-            var source = await _context.RssSources.SingleOrDefaultAsync(a => a.Uri == uri);
-            if (source == null)
-            {
-                RssSourceModel sourceModel = new RssSourceModel()
-                {
-                    RssSourceGuid = Guid.NewGuid(),
-                    Uri = uri
-                };
-                _context.RssSources.Add(sourceModel);
-                await _context.SaveChangesAsync();
-                source = sourceModel;
-            }
+            var feed = await FeedReader.ReadAsync(source.Uri);
             
-            var root = doc.Root.Descendants("item");
-            foreach (var item in root)
+            await AddItems(source.RssSourceGuid, feed.Items);
+        }
+
+        /// <summary>
+        /// Получение новостей по идентификатору источника
+        /// </summary>
+        /// <param name="guid">Идентификатор источника</param>
+        /// <returns></returns>
+        private async Task<List<RssItemModel>> GetItems(Guid guid)
+        {
+            var itemsModel = await _context.RssItems.Where(a => a.RssSourceGuid == guid).ToListAsync();
+            return _mapper.Map<List<RssItem>, List<RssItemModel>>(itemsModel);
+        }
+
+        /// <summary>
+        /// Добавить пустой источник
+        /// </summary>
+        /// <param name="title">Название источника</param>
+        /// <returns></returns>
+        private async Task<Guid> AddEmptySource(string title)
+        {
+            RssSource source = new RssSource(title);
+            _context.RssSources.Add(source);
+            await _context.SaveChangesAsync();
+            return source.RssSourceGuid;
+        }
+
+        /// <summary>
+        /// Добавить источник из URL
+        /// </summary>
+        /// <param name="uri">URL</param>
+        /// <returns></returns>
+        private async Task<Guid> AddSourceFromUri(string uri)
+        {
+            var feed = await FeedReader.ReadAsync(uri);
+            
+            RssSource source = new RssSource(uri, feed.Title);
+            _context.RssSources.Add(source);
+            await _context.SaveChangesAsync();
+            
+            await AddItems(source.RssSourceGuid, feed.Items);
+            
+            return source.RssSourceGuid;
+        }
+
+        /// <summary>
+        /// Добавление новостей из источника
+        /// </summary>
+        /// <param name="guid">Идентификатор источника</param>
+        /// <param name="items">Новости</param>
+        /// <returns></returns>
+        private async Task AddItems(Guid guid, ICollection<FeedItem> items)
+        {
+            foreach (var item in items)
             {
-                RssItemModel itemModel = new RssItemModel()
+//                if (!await _context.RssItems.AnyAsync(a => a.Title.Equals(item.Title))) continue;
+                
+                RssItem rssItem = new RssItem()
                 {
+                    Description = item.Description,
+                    Enclosure = item.Content,
+                    Link = item.Link,
                     RssItemGuid = Guid.NewGuid(),
-                    RssSourceGuid = source.RssSourceGuid,
-                    Description = item.Element("description").Value,
-                    Link = item.Element("link").Value,
-                    PubDate = Convert.ToDateTime(item.Element("pubDate").Value),
-                    Title = item.Element("title").Value
+                    RssSourceGuid = guid,
+                    Title = item.Title
                 };
                 
-                try
-                {
-                    itemModel.Enclosure = item.Element("enclosure").Attribute("url").Value;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
+                if (item.PublishingDateString != null) 
+                    rssItem.PubDate = Convert.ToDateTime(item.PublishingDateString);
 
-                var kek = await _context.RssItems.Where(a => a.Title.ToUpper().Equals(itemModel.Title.ToUpper())).ToListAsync();
-
-                if (kek.Count == 0)
-                {
-                    _context.RssItems.Add(itemModel);
-                    await _context.SaveChangesAsync();
-                }
+                _context.RssItems.Add(rssItem);
+                await _context.SaveChangesAsync();
             }
         }
     }
