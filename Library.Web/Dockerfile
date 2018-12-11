@@ -6,7 +6,7 @@ ARG source
 FROM microsoft/dotnet:2.2-sdk as build
 WORKDIR /app
 COPY /bin/Debug/netcoreapp2.2/publish .
-COPY wwwroot/ /wwwroot
+COPY /wwwroot /wwwroot
 
 # run
 WORKDIR /app
