@@ -103,7 +103,29 @@ namespace Library.Domain.Services
         private async Task<List<RssItemModel>> GetItems(Guid guid)
         {
             var itemsModel = await _context.RssItems.Where(a => a.RssSourceGuid == guid).ToListAsync();
-            return _mapper.Map<List<RssItem>, List<RssItemModel>>(itemsModel);
+            var items = _mapper.Map<List<RssItem>, List<RssItemModel>>(itemsModel);
+
+            foreach (var item in items)
+            {
+                if (item.PubDate.Date.Equals(Convert.ToDateTime("01.01.0001 0:00:00")))
+                {
+                    item.PubDateString = null;
+                }
+                else if (item.PubDate.Day == DateTime.Today.Day)
+                {
+                    item.PubDateString = "сегодня в " + item.PubDate.ToString("HH:mm");
+                }
+                else if (@item.PubDate + TimeSpan.FromDays(1) == DateTime.Today)
+                {
+                    item.PubDateString = "вчера в " + item.PubDate.ToString("HH:mm");
+                }
+                else
+                {
+                    item.PubDateString = item.PubDate.Date.ToShortDateString();
+                }
+            }
+
+            return items;
         }
 
         /// <summary>
@@ -162,8 +184,15 @@ namespace Library.Domain.Services
                 if (item.PublishingDateString != null) 
                     rssItem.PubDate = Convert.ToDateTime(item.PublishingDateString);
 
-                _context.RssItems.Add(rssItem);
-                await _context.SaveChangesAsync();
+                var any = await _context.RssItems
+                    .Where(a => a.RssSourceGuid == guid)
+                    .Where(b => b.Title.Equals(item.Title)).ToListAsync();
+                
+                if (any.Count == 0)
+                {
+                    _context.RssItems.Add(rssItem);
+                    await _context.SaveChangesAsync();
+                }
             }
         }
     }
