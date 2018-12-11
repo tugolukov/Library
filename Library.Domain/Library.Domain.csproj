@@ -8,5 +8,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="CodeHollow.FeedReader" Version="1.1.5" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Library.Domain.Interfaces;
 using Library.Domain.Models.RSS;
@@ -7,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Web.Controllers
 {
+    /// <summary>
+    /// RSS-контроллер
+    /// </summary>
     [Route("rss")]
     public class RssController : Controller
     {
@@ -17,35 +19,46 @@ namespace Library.Web.Controllers
             _rssService = rssService;
         }
 
+        /// <summary>
+        /// Получение страницы с новостями
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ViewResult> GetAll()
         {
-            await _rssService.Update();
-            var results = await _rssService.GetAllGroups();
+            var results = await _rssService.GetSources();
             return View(results);
         }
 
+        /// <summary>
+        /// Добавить источник из URL
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<RedirectToActionResult> AddSource(string uri)
         {
-            await _rssService.AddSource(uri);
-            return RedirectToAction(nameof(GetAll));
-        }
-
-        [HttpGet("update")]
-        public async Task<RedirectToActionResult> Update()
-        {
-            await _rssService.Update();
+            await _rssService.AddSourceWithUrl(uri);
             return RedirectToAction(nameof(GetAll));
         }
         
+        /// <summary>
+        /// Создать свой канал
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost("create")]
         public async Task<RedirectToActionResult> AddMySource(string name)
         {
-            await _rssService.AddMySource(name);
+            await _rssService.AddSourceWithoutUrl(name);
             return RedirectToAction(nameof(GetAll));
         }
 
+        /// <summary>
+        /// Добавить новость
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost("article")]
         public async Task<RedirectToActionResult> AddArticle(RssItemModel item)
         {
