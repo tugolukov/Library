@@ -168,9 +168,7 @@ namespace Library.Domain.Services
         private async Task AddItems(Guid guid, ICollection<FeedItem> items)
         {
             foreach (var item in items)
-            {
-//                if (!await _context.RssItems.AnyAsync(a => a.Title.Equals(item.Title))) continue;
-                
+            {               
                 RssItem rssItem = new RssItem()
                 {
                     Description = item.Description,
