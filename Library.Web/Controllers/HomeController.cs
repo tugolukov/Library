@@ -80,6 +80,7 @@ namespace Library.Web.Controllers
             stringBuilder.AppendLine("user-agent: Yandex");
             stringBuilder.AppendLine("disallow: /error/");
             stringBuilder.AppendLine("disallow: /books/delete/");
+            stringBuilder.AppendLine("disallow: /books/edit/");
             stringBuilder.AppendLine("allow: /error/foo");
             stringBuilder.AppendLine("sitemap: http://itlibrary.site/sitemap.xml");
         
