@@ -56,7 +56,14 @@
                     <td class="d-none d-lg-block">
                         <div class="view">
                             <a asp-controller="Books" asp-action="Read" asp-route-guid="@book.BookGuid">
-                                <img src="@book.ImageUri" class="img-fluid rounded" width="300px" alt="placeholder">
+                                @if (book.ImageUri == null)
+                                {
+                                    <img src="~/images/bookimage.jpg" class="img-fluid rounded" width="300px" alt="placeholder">
+                                }
+                                else
+                                {
+                                    <img src="@book.ImageUri" class="img-fluid rounded" width="300px" alt="placeholder">
+                                }
                                 <div class="mask flex-center waves-effect waves-light"></div>
                             </a>
                         </div>
@@ -176,7 +183,14 @@
                             <div class="row">
                                 <div class="col-6 col-md-3">
                                     <div class="view">
-                                        <img src="@book.ImageUri" class="img-fluid rounded" alt="placeholder">
+                                        @if (book.ImageUri == null)
+                                        {
+                                            <img src="~/images/bookimage.jpg" class="img-fluid rounded" width="300px" alt="placeholder">
+                                        }
+                                        else
+                                        {
+                                            <img src="@book.ImageUri" class="img-fluid rounded" width="300px" alt="placeholder">
+                                        }                                        
                                         <div class="mask flex-center waves-effect waves-light"></div>
                                     </div>
                                 </div>
