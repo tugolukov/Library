@@ -6,7 +6,7 @@
     Layout = "_Layout";
 }
 
-<style>   
+<style>
     .mysearch {
         height: 50px;
         border-radius: 10px;
@@ -16,223 +16,215 @@
 </style>
 
 <div class="container">
-    <form method="post" asp-controller="Books" asp-action="Create" class="needs-validation" novalidate>
-        <div class="row">
-            <div class="col-3">
-                <a class="btn mysearch btn-light btn-block" role="button" asp-controller="Books" asp-action="ReadAll">
-                    Назад
-                </a>
-            </div>
-            <div class="col-6"><h3 align="center">Добавление книги</h3></div>
-            <div class="col-3">
-                <button class="btn mysearch btn-blue-grey btn-block" type="submit">
-                    <i class="fa fa-save" aria-hidden="true"></i>
-                    Сохранить и выйти
-                </button>
-            </div>
-        </div>
-    
-        <hr>
-        
-        @* // Добавление автора *@
-        <div class="row" style="padding-top: 10px">
-            <div class="col-8">
-                <select class="form-control mysearch" id="author-dropdown" name="authorguid" required>
-                    <option value="">Выберите автора</option>
-                    @foreach (var item in ViewBag.authors)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
-                <div class="valid-tooltip">
-                    Верно!
-                </div>
-                <div class="invalid-tooltip">
-                    Выберите один пункт из выпадающего списка
-                </div>
-            </div>
-            <div class="col-4">
-                <span data-toggle="modal" data-target="#CreateAuthor">
-                    <a class="btn mysearch btn-info btn-block" role="button">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        Добавить автора
-                    </a>
-                </span>
-            </div>
-        </div>
+<form method="post" asp-controller="Books" asp-action="Create" class="needs-validation" novalidate>
+<div class="row">
+    <div class="col-3">
+        <a class="btn mysearch btn-light btn-block" role="button" asp-controller="Books" asp-action="ReadAll">
+            Назад
+        </a>
+    </div>
+    <div class="col-6">
+        <h3 align="center">Добавление книги</h3>
+    </div>
+    <div class="col-3">
+        <button class="btn mysearch btn-blue-grey btn-block" type="submit">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            Сохранить и выйти
+        </button>
+    </div>
+</div>
 
-        @* // Добавление издательства *@
-        <div class="row" style="padding-top: 10px">
-            <div class="col-8">
-                <select class="form-control mysearch" id="publishing-dropdown" name="publishingguid" required>
-                    <option value="">Выберите издательство</option>
-                    @foreach (var item in ViewBag.publishings)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
-                <div class="valid-tooltip">
-                    Верно!
-                </div>
-                <div class="invalid-tooltip">
-                    Выберите один пункт из выпадающего списка
-                </div>
-            </div>
-            <div class="col-4">
-                <span data-toggle="modal" data-target="#CreatePublishing">
-                    <a class="btn mysearch btn-info btn-block" role="button">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        Добавить издательство
-                    </a>
-                </span>
-            </div>
-        </div>
+<hr>
 
-        @* // Добавления сферы *@
-        <div class="row" style="padding-top: 10px">
-            <div class="col-8">
-                <select class="form-control mysearch" id="technology-dropdown" name="technologyguid" required>
-                    <option value="">Выберите серию</option>
-                    @foreach (var item in ViewBag.technologies)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
-                <div class="valid-tooltip">
-                    Верно!
-                </div>
-                <div class="invalid-tooltip">
-                    Выберите один пункт из выпадающего списка
-                </div>
-            </div>
-            <div class="col-4">
-                <span data-toggle="modal" data-target="#CreateTechnologies">
-                    <a class="btn mysearch btn-info btn-block" role="button">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        Добавить серию
-                    </a>
-                </span>
-            </div>
+@* // Добавление автора *@
+<div class="row" style="padding-top: 10px">
+    <div class="col-8">
+        <select class="form-control mysearch" id="author-dropdown" name="authorguid" required>
+            <option value="">Выберите автора</option>
+            @foreach (var item in ViewBag.authors)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+        <div class="valid-feedback">
+            Верно!
         </div>
+        <div class="invalid-feedback">
+            Выберите один пункт из выпадающего списка
+        </div>
+    </div>
+    <div class="col-4">
+        <span data-toggle="modal" data-target="#CreateAuthor">
+            <a class="btn mysearch btn-info btn-block" role="button">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                Добавить автора
+            </a>
+        </span>
+    </div>
+</div>
 
-        @* // Название книги *@
-        <div class="md-form mb-5">
-            <i class="fa fa-book prefix grey-text"></i>
-            <input type="text" id="title" name="title" class="form-control validate" required>
-            <label data-error="Значение не может быть пустым" data-success="" for="title">Название</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Значение не может быть пустым
-            </div>
+@* // Добавление издательства *@
+<div class="row" style="padding-top: 10px">
+    <div class="col-8">
+        <select class="form-control mysearch" id="publishing-dropdown" name="publishingguid" required>
+            <option value="">Выберите издательство</option>
+            @foreach (var item in ViewBag.publishings)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+        <div class="valid-feedback">
+            Верно!
         </div>
+        <div class="invalid-feedback">
+            Выберите один пункт из выпадающего списка
+        </div>
+    </div>
+    <div class="col-4">
+        <span data-toggle="modal" data-target="#CreatePublishing">
+            <a class="btn mysearch btn-info btn-block" role="button">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                Добавить издательство
+            </a>
+        </span>
+    </div>
+</div>
 
-        @* // Аннотация *@
-        <div class="md-form">
-            <i class="fa fa-pencil prefix grey-text"></i>
-            <textarea type="text" id="annotation" name="annotation" class="md-textarea form-control" rows="4" required></textarea>
-            <label data-error="Значение не может быть пустым" data-success="" for="annotation">Аннотация</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Значение не может быть пустым
-            </div>
+@* // Добавления сферы *@
+<div class="row" style="padding-top: 10px">
+    <div class="col-8">
+        <select class="form-control mysearch" id="technology-dropdown" name="technologyguid" required>
+            <option value="">Выберите серию</option>
+            @foreach (var item in ViewBag.technologies)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+        <div class="valid-feedback">
+            Верно!
         </div>
+        <div class="invalid-feedback">
+            Выберите один пункт из выпадающего списка
+        </div>
+    </div>
+    <div class="col-4">
+        <span data-toggle="modal" data-target="#CreateTechnologies">
+            <a class="btn mysearch btn-info btn-block" role="button">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                Добавить серию
+            </a>
+        </span>
+    </div>
+</div>
 
-        @* // Тип обложки *@
-        <div class="md-form mb-5">
-            <i class="fa fa-info-circle prefix grey-text"></i>
-            <input type="text" id="cover" name="cover" class="form-control validate" required>
-            <label data-error="Значение не может быть пустым" data-success="" for="cover">Тип обложки</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Значение не может быть пустым
-            </div>
-        </div>
-        
-        @* // Формат *@
-        <div class="md-form mb-5">
-            <i class="fa fa-info-circle prefix grey-text"></i>
-            <input type="text" id="format" name="format" class="form-control validate" required>
-            <label data-error="Значение не может быть пустым" data-success="" for="format">Формат книги</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Значение не может быть пустым
-            </div>
-        </div>
+<br/>
 
-        @* // Количество страниц *@
-        <div class="md-form mb-5">
-            <i class="fa fa-info-circle prefix grey-text"></i>
-            <input type="number" min="50" id="numberofpages" name="numberofpages" class="form-control validate" required>
-            <label data-error="Число должно быть больше 50" data-success="" for="numberofpages">Количество страниц</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Число должно быть больше 50
-            </div>
-        </div>
+@* // Название книги *@
+<div class="form-group">
+    <i class="fa fa-book prefix grey-text"></i>
+    <label for="title">Название</label>
+    <input type="text" id="title" name="title" class="form-control mysearch validate" required>
+    <div class="valid-feedback">
+        Верно!
+    </div>
+    <div class="invalid-feedback">
+        Значение не может быть пустым
+    </div>
+</div>
 
-        @* // Стоимость *@
-        <div class="md-form mb-5">
-            <i class="fa fa-money prefix grey-text"></i>
-            <input type="text" id="cost" name="cost" class="form-control validate" required>
-            <label data-error="Значение не может быть пустым" data-success="" for="cost">Информация о стоимости</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Значение не может быть пустым
-            </div>
-        </div>
+@* // Аннотация *@
+<div class="form-group">
+    <i class="fa fa-pencil prefix grey-text"></i>
+    <label data-error="Значение не может быть пустым" data-success="" for="annotation">Аннотация</label>
+    <textarea type="text" id="annotation" name="annotation" class="md-textarea form-control" rows="4" required style="border-radius: 10px "></textarea>
+    <div class="valid-feedback">
+        Верно!
+    </div>
+    <div class="invalid-feedback">
+        Значение не может быть пустым
+    </div>
+</div>
 
-        @* // Год *@
-        <div class="md-form mb-5">
-            <i class="fa fa-calendar-plus-o prefix grey-text"></i>
-            <input type="number" min="1950" max="2019" id="year" name="year" class="form-control validate" required>
-            <label data-error="Год должен быть в промежутке от 1950 до 2019" data-success="" for="year">Год</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Год должен быть в промежутке от 1950 до 2019
-            </div>
-        </div>
+@* // Тип обложки *@
+<div class="form-group">
+    <i class="fa fa-info-circle prefix grey-text"></i>
+    <label data-error="Значение не может быть пустым" data-success="" for="cover">Тип обложки</label>
+    <input type="text" id="cover" name="cover" class="form-control mysearch validate" required>
+    <div class="valid-feedback">
+        Верно!
+    </div>
+    <div class="invalid-feedback">
+        Значение не может быть пустым
+    </div>
+</div>
 
-        @* // Ссылка для покупки *@
-        <div class="md-form mb-5">
-            <i class="fa fa-external-link-square prefix grey-text"></i>
-            <input type="text" id="buyuri" name="buyuri" class="form-control" required>
-            <label data-error="Значение не может быть пустым" data-success="" for="buyuri">Ссылка для покупки</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Значение не может быть пустым
-            </div>
-        </div>
+@* // Формат *@
+<div class="form-group">
+    <i class="fa fa-info-circle prefix grey-text"></i>
+    <label data-error="Значение не может быть пустым" data-success="" for="format">Формат книги</label>
+    <input type="text" id="format" name="format" class="form-control mysearch validate" required>
+    <div class="valid-feedback">
+        Верно!
+    </div>
+    <div class="invalid-feedback">
+        Значение не может быть пустым
+    </div>
+</div>
 
-        @* // Ссылка на обложку *@
-        <div class="md-form mb-5">
-            <i class="fa fa-external-link-square prefix grey-text"></i>
-            <input type="text" id="imageuri" name="imageuri" class="form-control" required>
-            <label data-error="Значение не может быть пустым" data-success="" for="imageuri">Ссылка на обложку</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Значение не может быть пустым
-            </div>
-        </div>
-    </form>
-        </div>
+@* // Количество страниц *@
+<div class="form-group">
+    <i class="fa fa-info-circle prefix grey-text"></i>
+    <label data-error="Число должно быть больше 50" data-success="" for="numberofpages">Количество страниц</label>
+    <input type="number" min="50" id="numberofpages" name="numberofpages" class="form-control mysearch validate" required>
+    <div class="valid-feedback">
+        Верно!
+    </div>
+    <div class="invalid-feedback">
+        Число должно быть больше 50
+    </div>
+</div>
+
+@* // Стоимость *@
+<div class="form-group">
+    <i class="fa fa-money prefix grey-text"></i>
+    <label data-error="Значение не может быть пустым" data-success="" for="cost">Информация о стоимости</label>
+    <input type="text" id="cost" name="cost" class="form-control mysearch validate" required>
+    <div class="valid-feedback">
+        Верно!
+    </div>
+    <div class="invalid-feedback">
+        Значение не может быть пустым
+    </div>
+</div>
+
+@* // Год *@
+<div class="form-group">
+    <i class="fa fa-calendar-plus-o prefix grey-text"></i>
+    <label data-error="Год должен быть в промежутке от 1950 до 2019" data-success="" for="year">Год</label>
+    <input type="number" min="1950" max="2019" id="year" name="year" class="form-control mysearch validate" required>
+    <div class="valid-feedback">
+        Верно!
+    </div>
+    <div class="invalid-feedback">
+        Год должен быть в промежутке от 1950 до 2019
+    </div>
+</div>
+
+@* // Ссылка для покупки *@
+<div class="form-group">
+    <i class="fa fa-external-link-square prefix grey-text"></i>
+    <label data-error="Значение не может быть пустым" data-success="" for="buyuri">Ссылка для покупки</label>
+    <input type="text" id="buyuri" name="buyuri" class="form-control mysearch">
+</div>
+
+@* // Ссылка на обложку *@
+<div class="form-group">
+    <i class="fa fa-external-link-square prefix grey-text"></i>
+    <label data-error="Значение не может быть пустым" data-success="" for="imageuri">Ссылка на обложку</label>
+    <input type="text" id="imageuri" name="imageuri" class="form-control mysearch">
+</div>
+</form>
+</div>
 
 <div class="modal fade right" id="CreateAuthor" tabindex="-1" role="dialog" aria-labelledby="CreateAuthorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-full-height modal-right" role="document">
@@ -484,19 +476,24 @@
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
         'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
+        window.addEventListener('load',
+            function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms,
+                    function(form) {
+                        form.addEventListener('submit',
+                            function(event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            },
+                            false);
+                    });
+            },
+            false);
     })();
 </script>
