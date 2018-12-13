@@ -17,7 +17,14 @@
     <div class="row">
         <div class="col-6 col-md-3">
             <div class="view" style="padding-bottom: 15px">
-                <img src="@Model.ImageUri" class="img-fluid rounded" alt="placeholder">
+                @if (Model.ImageUri == null)
+                {
+                    <img src="~/images/bookimage.jpg" class="img-fluid rounded" alt="placeholder">
+                }
+                else
+                {
+                    <img src="@Model.ImageUri" class="img-fluid rounded" alt="placeholder">
+                }
                 <div class="mask flex-center waves-effect waves-light"></div>
             </div>
             <a class="btn btn-light btn-sm btn-block" data-toggle="collapse" href="#AnnotationCollapse-@Model.BookGuid" role="button" aria-expanded="false" aria-controls="AnnotationCollapse-@Model.BookGuid">Аннотация</a>
