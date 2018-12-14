@@ -59,9 +59,9 @@ namespace Library.Web.Controllers
             var publishings = await _publishingsService.ReadAll();
             var technologies = await _technologiesService.ReadAll();
 
-            ViewBag.authors = authors.ToSelectListItems();
-            ViewBag.publishings = publishings.ToSelectListItems();
-            ViewBag.technologies = technologies.ToSelectListItems();
+            ViewBag.authors = authors.OrderBy(a => a.Surname).ToList().ToSelectListItems();
+            ViewBag.publishings = publishings.OrderBy(a => a.Name).ToList().ToSelectListItems();
+            ViewBag.technologies = technologies.OrderBy(a => a.Name).ToList().ToSelectListItems();
             
             return View();
         }
@@ -82,9 +82,9 @@ namespace Library.Web.Controllers
             var publishings = await _publishingsService.ReadAll();
             var technologies = await _technologiesService.ReadAll();
 
-            ViewBag.authors = authors.ToSelectListItems();
-            ViewBag.publishings = publishings.ToSelectListItems();
-            ViewBag.technologies = technologies.ToSelectListItems();
+            ViewBag.authors = authors.OrderBy(a => a.Surname).ToList().ToSelectListItems();
+            ViewBag.publishings = publishings.OrderBy(a => a.Name).ToList().ToSelectListItems();
+            ViewBag.technologies = technologies.OrderBy(a => a.Name).ToList().ToSelectListItems();
             
             return View(book);
         }
