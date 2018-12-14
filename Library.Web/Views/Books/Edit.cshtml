@@ -153,7 +153,11 @@
         <div class="form-group">
             <i class="fa fa-info-circle prefix grey-text"></i>
             <label data-error="Значение не может быть пустым" data-success="" for="cover">Тип обложки</label>
-            <input type="text" id="cover" name="cover" class="form-control mysearch validate" value="@Model.Cover" required>
+            <select class="form-control mysearch validate" id="cover" name="cover" required>
+                <option value="@Model.Cover">@Model.Cover</option>
+                <option value="Мягкая">Мягкая</option>
+                <option value="Твердая">Твердая</option>
+            </select>
             <div class="valid-feedback">
                 Верно!
             </div>
@@ -166,7 +170,31 @@
         <div class="form-group">
             <i class="fa fa-info-circle prefix grey-text"></i>
             <label data-error="Значение не может быть пустым" data-success="" for="format">Формат книги</label>
-            <input type="text" id="format" name="format" class="form-control mysearch validate" value="@Model.Format" required>
+            <select class="form-control mysearch" id="format" name="format" required>
+                <option value="@Model.Format">@Model.Format</option>
+                <option value="60х84/32">60х84/32</option>
+                <option value="60х90/32">60х90/32</option>
+                <option value="70х90/32">70х90/32</option>
+                <option value="75х90/32">75х90/32</option>
+                <option value="70х100/32">70х100/32</option>
+                <option value="70х108/32">70х108/32</option>
+                <option value="84х108/32">84х108/32</option>
+                <option value="60х84/16">60х84/16</option>
+                <option value="60х90/16">60х90/16</option>
+                <option value="70х90/16">70х90/16</option>
+                <option value="75х90/16">75х90/16</option>
+                <option value="70х100/16">70х100/16</option>
+                <option value="70х108/16">70х108/16</option>
+                <option value="84х108/16">84х108/16</option>        
+                <option value="60х84/8">60х84/8</option>
+                <option value="60х90/8">60х90/8</option>
+                <option value="70х90/8">70х90/8</option>
+                <option value="75х90/8">75х90/8</option>
+                <option value="70х100/8">70х100/8</option>
+                <option value="70х108/8">70х108/8</option>
+                <option value="84х108/8">84х108/8</option>
+                <option value="Другой">Другой</option>
+            </select>
             <div class="valid-feedback">
                 Верно!
             </div>
