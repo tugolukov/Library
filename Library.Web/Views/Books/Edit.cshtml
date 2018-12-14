@@ -49,10 +49,10 @@
                         <option value="@item.Value">@item.Text</option>
                     }
                 </select>
-                <div class="valid-tooltip">
+                <div class="valid-feedback">
                     Верно!
                 </div>
-                <div class="invalid-tooltip">
+                <div class="invalid-feedback">
                     Выберите один пункт из выпадающего списка
                 </div>
             </div>
@@ -77,10 +77,10 @@
                         <option value="@item.Value">@item.Text</option>
                     }
                 </select>
-                <div class="valid-tooltip">
+                <div class="valid-feedback">
                     Верно!
                 </div>
-                <div class="invalid-tooltip">
+                <div class="invalid-feedback">
                     Выберите один пункт из выпадающего списка
                 </div>
             </div>
@@ -95,148 +95,165 @@
         </div>
         
         @* // Добавления сферы *@
-        <div class="row" style="padding-top: 10px">
-            <div class="col-8">
-                <select class="form-control mysearch" id="technology-dropdown" name="technologyguid" required>
-                    <option value="@Model.TechnologyModel.TechnologyGuid">@Model.TechnologyModel.Name</option>
-                    <option value="">Выберите серию</option>
-                    @foreach (var item in ViewBag.technologies)
-                    {
-                        <option value="@item.Value">@item.Text</option>
-                    }
-                </select>
-                <div class="valid-tooltip">
-                    Верно!
-                </div>
-                <div class="invalid-tooltip">
-                    Выберите один пункт из выпадающего списка
-                </div>
-            </div>
-            <div class="col-4">
-                <span data-toggle="modal" data-target="#CreateTechnologies">
-                    <a class="btn mysearch btn-info btn-block" role="button">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        Добавить серию
-                    </a>
-                </span>
-            </div>
-        </div>
-        
-        @* // Название книги *@
-        <div class="md-form mb-5">
-            <i class="fa fa-book prefix grey-text"></i>
-            <input type="text" id="title" name="title" class="form-control validate" value="@Model.Title" required>
-            <label data-error="Значение не может быть пустым" data-success="" for="title">Название</label>
-            <div class="valid-tooltip">
+    <div class="row" style="padding-top: 10px">
+        <div class="col-8">
+            <select class="form-control mysearch" id="technology-dropdown" name="technologyguid" required>
+                <option value="@Model.TechnologyModel.TechnologyGuid">@Model.TechnologyModel.Name</option>
+                <option value="">Выберите серию</option>
+                @foreach (var item in ViewBag.technologies)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+            <div class="valid-feedback">
                 Верно!
             </div>
-            <div class="invalid-tooltip">
+            <div class="invalid-feedback">
+                Выберите один пункт из выпадающего списка
+            </div>
+        </div>
+        <div class="col-4">
+            <span data-toggle="modal" data-target="#CreateTechnologies">
+                <a class="btn mysearch btn-info btn-block" role="button">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Добавить серию
+                </a>
+            </span>
+        </div>
+    </div>
+    <br/>
+        
+        @* // Название книги *@
+        <div class="form-group">
+            <i class="fa fa-book prefix grey-text"></i>
+            <label data-error="Значение не может быть пустым" data-success="" for="title">Название</label>
+            <input type="text" id="title" name="title" class="form-control mysearch validate" value="@Model.Title" required>
+            <div class="valid-feedback">
+                Верно!
+            </div>
+            <div class="invalid-feedback">
                 Значение не может быть пустым
             </div>
         </div>
         
         @* // Аннотация *@
-        <div class="md-form">
+        <div class="form-group">
             <i class="fa fa-pencil prefix grey-text"></i>
-            <textarea type="text" id="annotation" name="annotation" class="md-textarea form-control" rows="4" required>@Model.Annotation</textarea>
             <label data-error="Значение не может быть пустым" data-success="" for="annotation">Аннотация</label>
-            <div class="valid-tooltip">
+            <textarea type="text" id="annotation" name="annotation" class="md-textarea form-control" rows="4" required style="border-radius: 10px">@Model.Annotation</textarea>
+            <div class="valid-feedback">
                 Верно!
             </div>
-            <div class="invalid-tooltip">
+            <div class="invalid-feedback">
                 Значение не может быть пустым
             </div>
         </div>
         
         @* // Тип обложки *@
-        <div class="md-form mb-5">
+        <div class="form-group">
             <i class="fa fa-info-circle prefix grey-text"></i>
-            <input type="text" id="cover" name="cover" class="form-control validate" value="@Model.Cover" required>
             <label data-error="Значение не может быть пустым" data-success="" for="cover">Тип обложки</label>
-            <div class="valid-tooltip">
+            <select class="form-control mysearch validate" id="cover" name="cover" required>
+                <option value="@Model.Cover">@Model.Cover</option>
+                <option value="Мягкая">Мягкая</option>
+                <option value="Твердая">Твердая</option>
+            </select>
+            <div class="valid-feedback">
                 Верно!
             </div>
-            <div class="invalid-tooltip">
+            <div class="invalid-feedback">
                 Значение не может быть пустым
             </div>
         </div>
         
         @* // Формат *@
-        <div class="md-form mb-5">
+        <div class="form-group">
             <i class="fa fa-info-circle prefix grey-text"></i>
-            <input type="text" id="format" name="format" class="form-control validate" value="@Model.Format" required>
             <label data-error="Значение не может быть пустым" data-success="" for="format">Формат книги</label>
-            <div class="valid-tooltip">
+            <select class="form-control mysearch" id="format" name="format" required>
+                <option value="@Model.Format">@Model.Format</option>
+                <option value="60х84/32">60х84/32</option>
+                <option value="60х90/32">60х90/32</option>
+                <option value="70х90/32">70х90/32</option>
+                <option value="75х90/32">75х90/32</option>
+                <option value="70х100/32">70х100/32</option>
+                <option value="70х108/32">70х108/32</option>
+                <option value="84х108/32">84х108/32</option>
+                <option value="60х84/16">60х84/16</option>
+                <option value="60х90/16">60х90/16</option>
+                <option value="70х90/16">70х90/16</option>
+                <option value="75х90/16">75х90/16</option>
+                <option value="70х100/16">70х100/16</option>
+                <option value="70х108/16">70х108/16</option>
+                <option value="84х108/16">84х108/16</option>        
+                <option value="60х84/8">60х84/8</option>
+                <option value="60х90/8">60х90/8</option>
+                <option value="70х90/8">70х90/8</option>
+                <option value="75х90/8">75х90/8</option>
+                <option value="70х100/8">70х100/8</option>
+                <option value="70х108/8">70х108/8</option>
+                <option value="84х108/8">84х108/8</option>
+                <option value="Другой">Другой</option>
+            </select>
+            <div class="valid-feedback">
                 Верно!
             </div>
-            <div class="invalid-tooltip">
+            <div class="invalid-feedback">
                 Значение не может быть пустым
             </div>
         </div>
         
         @* // Количество страниц *@
-        <div class="md-form mb-5">
+        <div class="form-group">
             <i class="fa fa-info-circle prefix grey-text"></i>
-            <input type="number" min="50" id="numberofpages" name="numberofpages" class="form-control validate" value="@Model.NumberOfPages" required>
             <label data-error="Число должно быть больше 50" data-success="" for="numberofpages">Количество страниц</label>
-            <div class="valid-tooltip">
+            <input type="number" min="50" id="numberofpages" name="numberofpages" class="form-control mysearch validate" value="@Model.NumberOfPages" required>
+            <div class="valid-feedback">
                 Верно!
             </div>
-            <div class="invalid-tooltip">
+            <div class="invalid-feedback">
                 Число должно быть больше 50
             </div>
         </div>
         
         @* // Стоимость *@
-        <div class="md-form mb-5">
+        <div class="form-group">
             <i class="fa fa-money prefix grey-text"></i>
-            <input type="text" id="cost" name="cost" class="form-control validate" value="@Model.Cost" required>
             <label data-error="Значение не может быть пустым" data-success="" for="cost">Информация о стоимости</label>
-            <div class="valid-tooltip">
+            <input type="text" id="cost" name="cost" class="form-control mysearch validate" value="@Model.Cost" required>
+            <div class="valid-feedback">
                 Верно!
             </div>
-            <div class="invalid-tooltip">
+            <div class="invalid-feedback">
                 Значение не может быть пустым
             </div>
         </div>
         
         @* // Год *@
-        <div class="md-form mb-5">
+        <div class="form-group">
             <i class="fa fa-calendar-plus-o prefix grey-text"></i>
-            <input type="number" min="1950" max="2019" id="year" name="year" class="form-control validate" value="@Model.Year" required>
             <label data-error="Год должен быть в промежутке от 1950 до 2019" data-success="" for="year">Год</label>
-            <div class="valid-tooltip">
+            <input type="number" min="1950" max="2019" id="year" name="year" class="form-control mysearch validate" value="@Model.Year" required>
+            <div class="valid-feedback">
                 Верно!
             </div>
-            <div class="invalid-tooltip">
+            <div class="invalid-feedback">
                 Год должен быть в промежутке от 1950 до 2019
             </div>
         </div>
         
         @* // Ссылка для покупки *@
-        <div class="md-form mb-5">
+        <div class="form-group">
             <i class="fa fa-external-link-square prefix grey-text"></i>
-            <input type="text" id="buyuri" name="buyuri" class="form-control" value="@Model.BuyUri" required>
             <label data-error="Значение не может быть пустым" data-success="" for="buyuri">Ссылка для покупки</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Значение не может быть пустым
-            </div>
+            <input type="text" id="buyuri" name="buyuri" class="form-control mysearch" value="@Model.BuyUri">
         </div>
         
         @* // Ссылка на обложку *@
-        <div class="md-form mb-5">
+        <div class="form-group">
             <i class="fa fa-external-link-square prefix grey-text"></i>
-            <input type="text" id="imageuri" name="imageuri" class="form-control" value="@Model.ImageUri" required>
             <label data-error="Значение не может быть пустым" data-success="" for="imageuri">Ссылка на обложку</label>
-            <div class="valid-tooltip">
-                Верно!
-            </div>
-            <div class="invalid-tooltip">
-                Значение не может быть пустым
-            </div>
+            <input type="text" id="imageuri" name="imageuri" class="form-control mysearch" value="@Model.ImageUri">
         </div>
     </form>
 </div>

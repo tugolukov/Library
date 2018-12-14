@@ -61,6 +61,48 @@
     <link href="~/css/addons/datatables.min.css" rel="stylesheet">
     <link href="~/css/site.css" rel="stylesheet"/>
     <link href="~/css/style.css" rel="stylesheet"/>
+    
+    <style>
+        .view {
+            position: relative;
+            overflow: hidden;
+            cursor: default; }
+        .view .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-attachment: fixed; }
+        .view img, .view video {
+            position: relative;
+            display: block; }
+        .view video.video-intro {
+            z-index: -100;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            -ms-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+            -webkit-transition: 1s opacity;
+            -o-transition: 1s opacity;
+            transition: 1s opacity;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto; }
+
+        .overlay .mask {
+            opacity: 0;
+            -webkit-transition: all 0.4s ease-in-out;
+            -o-transition: all 0.4s ease-in-out;
+            transition: all 0.4s ease-in-out; }
+        .overlay .mask:hover {
+            opacity: 1; }
+    </style>
 </head>
 <body>
 <header>
@@ -73,8 +115,8 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
+            <div class="navbar-collapse collapse d-sm-inline-flex">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownBooks" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
                             База данных
@@ -84,17 +126,17 @@
                             <div class="dropdown-divider"></div>
                             <a asp-area="" asp-controller="Search" asp-action="Index" class="dropdown-item">Поиск</a>
                             <a asp-area="" asp-controller="Books" asp-action="Statistic" class="dropdown-item">Статистика по БД</a>
-
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Services" asp-action="Index">Сервисы</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Xml" asp-action="Index">XML</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Links">Полезные материалы</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownBooks" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                            Полезные ссылки
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownBooks">
+                            <a class="dropdown-item" asp-area="" asp-controller="Services" asp-action="Index">Сервисы</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Xml" asp-action="Index">XML</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Links">Ресурсы</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Rss" asp-action="GetAll">Новости</a>
@@ -109,6 +151,15 @@
                         </div>
                     </li>
                 </ul>
+                <form class="form-inline my-1" action="https://yandex.ru/search/site/" method="get" target="_blank" accept-charset="utf-8">
+                    <input type="hidden" name="searchid" value="2334526"/>
+                    <input type="hidden" name="l10n" value="ru"/>
+                    <input type="hidden" name="reqenc" value=""/>
+                    <div class="md-form form-sm my-0">
+                        <input type="search" class="form-control mysearch mb-0" aria-label="Search" name="text" placeholder="Найти на сайте" value="" style="width: 300px"/>
+                    </div>
+                    <button type="submit" class="btn btn-light my-0">Найти</button>
+                </form>
             </div>
         </div>
     </nav>
@@ -119,66 +170,38 @@
     </main>
 </div>
 
-<footer class="page-footer black-text pt-4" style="background-color: #ffffff">
+<footer class="page-footer black-text border-top shadow fixed-bottom" style="background-color: #ffffff; height: 60px">
     <!-- Copyright -->
-    <div class="footer-copyright black-text text-center py-3" style="background-color: #eeeeee">
+    <div class="footer-copyright black-text text-center py-3" style="background-color: #ffffff">
+        <!-- Yandex.Metrika informer -->
+        <a href="https://metrika.yandex.ru/stat/?id=51361246&amp;from=informer"
+           target="_blank" rel="nofollow">
+            <img src="https://informer.yandex.ru/informer/51361246/3_0_ECECECFF_CCCCCCFF_0_pageviews"
+                 style="width: 88px; height: 40px; border: 0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="51361246" data-lang="ru"/></a>
+        <!-- /Yandex.Metrika informer -->
         © 2018 - Туголуков Никита:
         <a class="black-text" href="http://itlibrary.site/"> База данных "Книги"</a>
     </div>
     <!-- Copyright -->
-    <!-- Footer Links -->
-    @* Поиск по сайту от Яндекса *@
-    <div class="container" style="padding-top: 20px">
-        <div class="ya-site-form ya-site-form_inited_no"
-             onclick="return { 'action': 'https://yandex.ru/search/site/', 'arrow': false, 'bg': '#ffffff', 'fontsize': 16, 'fg': '#000000', 'language': 'ru', 'logo': 'rb', 'publicname': 'Поиск по itlibrary.site', 'suggest': true, 'target': '_blank', 'tld': 'ru', 'type': 2, 'usebigdictionary': true, 'searchid': 2334526, 'input_fg': '#000000', 'input_bg': '#ffffff', 'input_fontStyle': 'normal', 'input_fontWeight': 'normal', 'input_placeholder': 'Введите запрос', 'input_placeholderColor': '#000000', 'input_borderColor': '#7f9db9' }">
-            <form action="https://yandex.ru/search/site/" method="get" target="_blank" accept-charset="utf-8">
-                <input type="hidden" name="searchid" value="2334526"/>
-                <input type="hidden" name="l10n" value="ru"/>
-                <input type="hidden" name="reqenc" value=""/>
-                <input type="search" class="form-control" name="text" value=""/>
-                <input type="submit" class="btn btn-info" value="Найти"/>
-            </form>
-        </div>
-        <style type="text/css">
-            .ya-page_js_yes .ya-site-form_inited_no 
-            {
-                display: none;
-            }
-
-            .body-content { }
-        </style>
-        <script type="text/javascript">
-            (function(w, d, c) {
-                var s=d.createElement('script'),
-                    h=d.getElementsByTagName('script')[0],
-                    e=d.documentElement;
-                if ((' ' + e.className + ' ').indexOf(' ya-page_js_yes ') === -1) {
-                    e.className+=' ya-page_js_yes';
-                }
-                s.type='text/javascript';
-                s.async=true;
-                s.charset='utf-8';
-                s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';
-                h.parentNode.insertBefore(s,h);
-                (w[c] || (w[c] = [])).push(function() { Ya.Site.Form.init() });
-            })
-                (window,document,'yandex_site_callbacks');
-        </script>
-        <hr/>
-    </div>
-    <div class="container">
-        <span class="body-content" style="align-content: center">
-            <!-- Yandex.Metrika informer -->
-            <a href="https://metrika.yandex.ru/stat/?id=51361246&amp;from=informer"
-               target="_blank" rel="nofollow">
-                <img src="https://informer.yandex.ru/informer/51361246/3_0_ECECECFF_CCCCCCFF_0_pageviews"
-                     style="width: 88px; height: 40px; border: 0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="51361246" data-lang="ru"/></a>
-            <!-- /Yandex.Metrika informer -->
-        </span>
-    </div>
-    <!-- Footer Links -->
 </footer>
 
+<script type="text/javascript">
+    (function(w, d, c) {
+            var s=d.createElement('script'),
+                h=d.getElementsByTagName('script')[0],
+                e=d.documentElement;
+            if ((' ' + e.className + ' ').indexOf(' ya-page_js_yes ') === -1) {
+                e.className+=' ya-page_js_yes';
+            }
+            s.type='text/javascript';
+            s.async=true;
+            s.charset='utf-8';
+            s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';
+            h.parentNode.insertBefore(s,h);
+            (w[c] || (w[c] = [])).push(function() { Ya.Site.Form.init() });
+        })
+        (window,document,'yandex_site_callbacks');
+</script>
 
 <environment include="Development">
     <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -207,6 +230,27 @@
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
+</script>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
 
 @RenderSection("Scripts", required: false)
