@@ -299,14 +299,14 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
+                    <div class="form-group">
                         <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="uri" class="form-control validate" required="">
                         <label data-error="wrong" data-success="right" for="uri">Ссылка</label>
-                        <div class="valid-tooltip">
+                        <input type="text" name="uri" class="form-control mysearch validate" required="">
+                        <div class="valid-feedback">
                             Верно!
                         </div>
-                        <div class="invalid-tooltip">
+                        <div class="invalid-feedback">
                             Значение не может быть пустым
                         </div>
                     </div>
@@ -315,7 +315,7 @@
                     <div class="row">
                         <button class="btn btn-warning" type="button" data-dismiss="modal">Отменить</button>
                         <button type="submit" class="btn btn-info">СОХРАНИТЬ</button>
-                    </div>
+                    </div>s
                 </div>
             </form>
         </div>
@@ -333,14 +333,14 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
+                    <div class="form-group">
                         <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="name" class="form-control validate" required="">
                         <label data-error="wrong" data-success="right" for="name">Название</label>
-                        <div class="valid-tooltip">
+                        <input type="text" name="name" class="form-control mysearch validate" required="">
+                        <div class="valid-feedback">
                             Верно!
                         </div>
-                        <div class="invalid-tooltip">
+                        <div class="invalid-feedback">
                             Значение не может быть пустым
                         </div>
                     </div>
@@ -367,7 +367,7 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
-
+                    <label for="source-dropdown">Канал</label>
                     <select class="form-control mysearch" id="source-dropdown" name="rsssourceguid" required>
                         <option value="">Выберите канал</option>
                         @foreach (var item in @Model.Where(@a => a.Source.Uri == null).ToList())
@@ -375,50 +375,45 @@
                             <option value="@item.Source.RssSourceGuid">@item.Source.Title</option>
                         }
                     </select>
-                    <div class="valid-tooltip">
+                    <div class="valid-feedback">
                         Верно!
                     </div>
-                    <div class="invalid-tooltip">
+                    <div class="invalid-feedback">
                         Выберите один пункт из выпадающего списка
                     </div>
-
-                    <div class="md-form mb-5">
+                    <br/>
+                    
+                    <div class="form-group">
                         <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="title" class="form-control validate" required="">
                         <label for="title">Заголовок</label>
-                        <div class="valid-tooltip">
+                        <input type="text" name="title" class="form-control mysearch validate" required="">
+                        <div class="valid-feedback">
                             Верно!
                         </div>
-                        <div class="invalid-tooltip">
+                        <div class="invalid-feedback">
                             Значение не может быть пустым
                         </div>
                     </div>
-                    <div class="md-form mb-5">
+                    <div class="form-group">
                         <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <textarea type="text" id="description" name="description" class="md-textarea form-control" rows="4" required></textarea>
                         <label for="description">Название</label>
-                        <div class="valid-tooltip">
+                        <textarea type="text" id="description" name="description" class="md-textarea form-control" rows="4" required></textarea>
+                        <div class="valid-feedback">
                             Верно!
                         </div>
-                        <div class="invalid-tooltip">
+                        <div class="invalid-feedback">
                             Значение не может быть пустым
                         </div>
                     </div>
-                    <div class="md-form mb-5">
+                    <div class="form-group">
                         <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="link" class="form-control validate" required="">
                         <label for="link">Ссылка на источник</label>
-                        <div class="valid-tooltip">
-                            Верно!
-                        </div>
-                        <div class="invalid-tooltip">
-                            Значение не может быть пустым
-                        </div>
+                        <input type="text" name="link" class="form-control mysearch">
                     </div>
-                    <div class="md-form mb-5">
+                    <div class="form-group">
                         <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="enclosure" class="form-control">
                         <label for="enclosure">Ссылка на изображение</label>
+                        <input type="text" name="enclosure" class="form-control mysearch">
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
