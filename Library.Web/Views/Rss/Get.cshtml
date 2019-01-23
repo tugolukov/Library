@@ -1,30 +1,10 @@
 @using System.Web
-@using Library.Database.Models.RSS
-@model System.Collections.Generic.List<Library.Domain.Models.RSS.RssGroupModel>
+@model System.Collections.Generic.List<Library.Domain.Models.RSS.RssItemModelFull>
 
 @{
-    ViewBag.Title = "RSS";
+    ViewBag.Title = "title";
     Layout = "_Layout";
-    int index = 0;
-    int otherIndex = 0;
 }
-
-<style>
-    .mysearch {
-        height: 50px;
-        border-radius: 10px;
-    }
-
-    .btn { border-radius: 10px; }
-    
-    .cardnullround {
-        border-radius: 0;
-    }
-    
-    .nav-pills > li > a.active {
-        background-color: slategrey!important;
-    }
-</style>
 
 <div class="container">
     <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -47,7 +27,7 @@
         </div>
         <div class="col-sm-8">
             <div class="btn-group" role="group" aria-label="btn group" style="float: right">
-                @if (Model.Any(a => a.Source.Uri == null))
+                @if (Model.Any(a => a.SourceModel.Uri == null))
                 {
                     <button class="btn btn-light-green" type="button" data-toggle="modal" data-target="#CreateArticle">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -65,7 +45,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="collapse" id="rsscollapse">
         <hr>
         <div class="row">
@@ -74,7 +54,7 @@
                 <h5 align="center">Инструкции</h5>
             </div>
             <div class="col-3">
-                <a class="btn btn-sm btn-grey btn-block" role="button" asp-controller="Rss" asp-action="Get">Перейти в режим списка</a>
+                <a class="btn btn-sm btn-grey btn-block" role="button" asp-controller="Rss" asp-action="GetAll">Перейти в режим вкладок</a>
             </div>
         </div>
         <ul class="nav nav-pills" id="pills-tab" role="tablist">
@@ -99,13 +79,13 @@
         </ul>
         <div class="tab-content pt-2 pl-1" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-mychannel" role="tabpanel" aria-labelledby="pills-mychannel-tab">
-                <div class="card-group">            
+                <div class="card-group">
                     <div class="card cardnullround">
                         <div class="card-body">
                             <h6 class="card-title">Как добавить свой канал?</h6>
                             <p class="card-text">Нажмите на кнопку "Добавить свой канал" и в открывшемся модальном окне введите название канала.</p>
-                        </div>                
-                    </div>                
+                        </div>
+                    </div>
                     <div class="card cardnullround">
                         <div class="card-body">
                             <h6 class="card-title">Как добавить новость в свой канал?</h6>
@@ -114,33 +94,33 @@
                                 <li class="dark-grey-text">Нажмите на эту кнопку.</li>
                                 <li class="dark-grey-text">В открывшемся модальном окне выберите свой канал (их может быть несколько) и заполните форму.</li>
                                 <li class="dark-grey-text">После нажатия кнопки "Добавить" страница перезагрузится, а ваша новость будет добавлена в канал.</li>
-                            </p>                
-                        </div>                
-                    </div>                
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-otherchannel" role="tabpanel" aria-labelledby="pills-otherchannel-tab">
-                <div class="card-group">            
+                <div class="card-group">
                     <div class="card cardnullround">
                         <div class="card-body">
                             <h6 class="card-title">Какие могут быть источники?</h6>
                             <p class="card-text">URL должны содержать ссылку на XML-страницу с генерируемыми новостями.</p>
                             <a role="button" class="btn btn-light-green btn-md" href="https://news.yandex.ru/computers.rss">Пример</a>
-                        </div>                
-                    </div>                
+                        </div>
+                    </div>
                     <div class="card cardnullround">
                         <div class="card-body">
                             <h6 class="card-title">Как добавить сторонний источник?</h6>
-                            <p class="card-text">Нажмите на кнопку "Добавить из URL" и в открывшемся модальном окне введите URL источника новостей</p>                
-                        </div>                
-                    </div>                
+                            <p class="card-text">Нажмите на кнопку "Добавить из URL" и в открывшемся модальном окне введите URL источника новостей</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-allrules" role="tabpanel" aria-labelledby="pills-allrules-tab">
                 <div class="card cardnullround">
                     <div class="card-body">
                         На этой странице представлен функционал работы с RSS-источниками. Все источники разделены по вкладкам,
-                        что позволяет не терять нужные новости из внимания. Далее описаны основные возможности работы с RSS.                    
+                        что позволяет не терять нужные новости из внимания. Далее описаны основные возможности работы с RSS.
                     </div>
                 </div>
                 <div class="card-group">
@@ -153,25 +133,29 @@
                     <div class="card cardnullround">
                         <div class="card-body">
                             <h6 class="card-title">Добавление новостей</h6>
-                            <p class="card-text">Если свой канал уже создан, появляется возможность добавления новостей в эти каналы.
-                                В каналы из сторонних источников свои новости добавить нельзя.</p>
+                            <p class="card-text">
+                                Если свой канал уже создан, появляется возможность добавления новостей в эти каналы.
+                                В каналы из сторонних источников свои новости добавить нельзя.
+                            </p>
                         </div>
                     </div>
                     <div class="card cardnullround">
                         <div class="card-body">
                             <h6 class="card-title">Сторонние источники</h6>
-                            <p class="card-text">Вы можете добавить сторонние источники RSS-контента, введя URL в форму ввода. Каждый из источников
-                                будет отображаться в отдельной вкладке.</p>
+                            <p class="card-text">
+                                Вы можете добавить сторонние источники RSS-контента, введя URL в форму ввода. Каждый из источников
+                                будет отображаться в отдельной вкладке.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <hr>
-    
-    
+
+
     @if (@Model.Count == 0)
     {
         <div class="alert alert-info" role="alert">
@@ -180,119 +164,57 @@
     }
     else
     {
-        <!--Шапка вкладок-->
-        <ul class="nav nav-tabs mb-3" id="RssTab" role="tablist">
-            @foreach (var rssGroupModel in Model)
+        <div class="container">
+            @foreach (var item in Model)
             {
-                if (index == 0)
-                {
-                    <li class="nav-item">
-                        <a class="nav-link active"
-                           id="tabpanel-@rssGroupModel.Source.RssSourceGuid"
-                           data-toggle="tab" href="#id-@rssGroupModel.Source.RssSourceGuid"
-                           role="tab" aria-controls="tabpanel-@rssGroupModel.Source.RssSourceGuid"
-                           aria-selected="true">
-                            @rssGroupModel.Source.Title
-                        </a>
-                    </li>
-                    index = index + 1;
-                }
-                else
-                {
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           id="tabpanel-@rssGroupModel.Source.RssSourceGuid"
-                           data-toggle="tab" href="#id-@rssGroupModel.Source.RssSourceGuid"
-                           role="tab" aria-controls="tabpanel-@rssGroupModel.Source.RssSourceGuid"
-                           aria-selected="false">
-                            @rssGroupModel.Source.Title
-                        </a>
-                    </li>
-                }
-            }
-        </ul>
-    
-        <!--Контент во вкладках-->
-        <div class="tab-content" id="RssTabContent">
-            @foreach (var rssGroupModel in Model)
-            {
-                if (otherIndex == 0)
-                {
-                    <div class="tab-pane fade show active"
-                         id="id-@rssGroupModel.Source.RssSourceGuid" role="tabpanel"
-                         aria-labelledby="tabpanel-@rssGroupModel.Source.RssSourceGuid">
-    
-                        @if (@rssGroupModel.Source.Uri == null)
+                <div class="card mb-1">
+                    <div class="card-header">
+                        @if (@item.PubDateString != null)
                         {
-                            if (@rssGroupModel.Items.Count == 0)
-                            {
-                                <div class="alert alert-info" role="alert">
-                                    В канале "@rssGroupModel.Source.Title" нет новостей. Нажмите кнопку "Добавить новость", чтобы тут что-то появилось.
-                                </div>
-                            }
+                            <p class="card-text">Опубликовано @item.PubDateString</p>
                         }
-    
-                        @foreach (var item in rssGroupModel.Items)
-                        {   
-                            <div class="card mb-1">
-                                @if (@item.PubDateString != null)
-                                {
-                                    <div class="card-header">
-                                        <p class="card-text">Опубликовано @item.PubDateString</p>
-                                    </div>
-                                }
-                                <div class="card-body">
-                                    <h4 class="card-title">@item.Title</h4>
-                                    <p class="card-text">@Html.Raw(HttpUtility.HtmlDecode(@item.Description))</p>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="@item.Link" class="btn btn-light">Подробнее</a>
-                                </div>
-                            </div>
+                        else
+                        {
+                            <p class="card-text">Дата публикации не указана</p>
                         }
+                        <p class="card-text">Источник: @item.SourceModel.Title</p>
                     </div>
-                    otherIndex = otherIndex + 1;
-                }
-                else
-                {
-                    <div class="tab-pane fade"
-                         id="id-@rssGroupModel.Source.RssSourceGuid" role="tabpanel"
-                         aria-labelledby="tabpanel-@rssGroupModel.Source.RssSourceGuid">
-    
-                        @if (@rssGroupModel.Source.Uri == null)
-                        {
-                            if (@rssGroupModel.Items.Count == 0)
-                            {
-                                <div class="alert alert-info" role="alert">
-                                    В канале "@rssGroupModel.Source.Title" нет новостей. Нажмите кнопку "Добавить новость", чтобы тут что-то появилось.
-                                </div>
-                            }
-                        }
-    
-                        @foreach (var item in rssGroupModel.Items)
-                        {
-                            if (item.RssSourceGuid == rssGroupModel.Source.RssSourceGuid)
-                            {
-                                <div class="card mb-1">
-                                    @if (@item.PubDateString != null)
-                                    {
-                                        <div class="card-header">
-                                            <p class="card-text">Опубликовано @item.PubDateString</p>
-                                        </div>
-                                    }
-                                    <div class="card-body">
-                                        <h4 class="card-title">@item.Title</h4>
-                                        <p class="card-text">@Html.Raw(HttpUtility.HtmlDecode(@item.Description))</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <a href="@item.Link" class="btn btn-light">Подробнее</a>
-                                    </div>
-                                </div>
-                            }
-                        }
+                    <div class="card-body">
+                        <h4 class="card-title">@item.Title</h4>
+                        <p class="card-text">@Html.Raw(HttpUtility.HtmlDecode(@item.Description))</p>
                     </div>
-                }
+                    <div class="card-footer">
+                        <a href="@item.Link" class="btn btn-light">Подробнее</a>
+                    </div>
+                </div>
             }
+            
+            <hr/>
+            
+            <div class="btn-group" role="group" aria-label="Basic example">
+                @if (Model.PreviousPage != 0)
+                {
+                    <a class="btn btn-light-green" role="button" asp-controller="Books" asp-action="ReadAll" asp-route-page="@Model.PreviousPage">Предыдущая</a>
+                }
+
+                @for (int i = 1; i <= Model.Count; i++)
+                {
+                    if (Model.CurrentPage == i)
+                    {
+                        <button type="button" class="btn btn-light-green" disabled>@i</button>
+                    }
+                    else
+                    {
+                        <a class="btn btn-light-green" role="button" asp-controller="Books" asp-action="ReadAll" asp-route-page="@i">@i</a>
+                    }
+                }
+
+                @if (Model.NextPage <= Model.Count)
+                {
+                    <a class="btn btn-light-green" role="button" asp-controller="Books" asp-action="ReadAll" asp-route-page="@Model.NextPage">Следующая</a>
+                }
+
+            </div>
         </div>
     }
 </div>
@@ -379,9 +301,9 @@
 
                     <select class="form-control mysearch" id="source-dropdown" name="rsssourceguid" required>
                         <option value="">Выберите канал</option>
-                        @foreach (var item in @Model.Where(@a => a.Source.Uri == null).ToList())
+                        @foreach (var item in @Model.Where(@a => a.SourceModel.Uri == null).ToList())
                         {
-                            <option value="@item.Source.RssSourceGuid">@item.Source.Title</option>
+                            <option value="@item.SourceModel.RssSourceGuid">@item.SourceModel.Title</option>
                         }
                     </select>
                     <div class="valid-tooltip">

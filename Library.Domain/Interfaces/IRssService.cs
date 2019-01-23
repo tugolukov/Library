@@ -8,6 +8,12 @@ namespace Library.Domain.Interfaces
     public interface IRssService
     {
         /// <summary>
+        /// Получение списка новостей
+        /// </summary>
+        /// <returns></returns>
+        Task<List<RssItemModelFull>> Get();
+        
+        /// <summary>
         /// Получение всех новостей для отображения во вкладках
         /// </summary>
         /// <returns></returns>

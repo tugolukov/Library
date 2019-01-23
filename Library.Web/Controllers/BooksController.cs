@@ -2,7 +2,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Library.Domain.Interfaces;
+using Library.Domain.Models.Author;
 using Library.Domain.Models.Book;
+using Library.Domain.Models.Publishing;
+using Library.Domain.Models.Technology;
 using Library.Web.Utils;
 using Microsoft.AspNetCore.Mvc;
 
@@ -59,6 +62,21 @@ namespace Library.Web.Controllers
             var publishings = await _publishingsService.ReadAll();
             var technologies = await _technologiesService.ReadAll();
 
+            authors.Sort(delegate(AuthorModel model, AuthorModel authorModel)
+                {
+                    return string.Compare(model.Surname, authorModel.Surname, StringComparison.Ordinal);
+                });
+            
+            publishings.Sort(delegate(PublishingModel model, PublishingModel publishingModel)
+                {
+                    return string.Compare(model.Name, publishingModel.Name, StringComparison.Ordinal);
+                });
+            
+            technologies.Sort(delegate(TechnologyModel model, TechnologyModel technologyModel)
+                {
+                    return string.Compare(model.Name, technologyModel.Name, StringComparison.Ordinal);
+                });
+            
             ViewBag.authors = authors.ToSelectListItems();
             ViewBag.publishings = publishings.ToSelectListItems();
             ViewBag.technologies = technologies.ToSelectListItems();
@@ -82,6 +100,22 @@ namespace Library.Web.Controllers
             var publishings = await _publishingsService.ReadAll();
             var technologies = await _technologiesService.ReadAll();
 
+            authors.Sort(delegate(AuthorModel model, AuthorModel authorModel)
+            {
+                return string.Compare(model.Surname, authorModel.Surname, StringComparison.Ordinal);
+            });
+            
+            publishings.Sort(delegate(PublishingModel model, PublishingModel publishingModel)
+            {
+                return string.Compare(model.Name, publishingModel.Name, StringComparison.Ordinal);
+            });
+            
+            technologies.Sort(delegate(TechnologyModel model, TechnologyModel technologyModel)
+            {
+                return string.Compare(model.Name, technologyModel.Name, StringComparison.Ordinal);
+            });
+
+
             ViewBag.authors = authors.ToSelectListItems();
             ViewBag.publishings = publishings.ToSelectListItems();
             ViewBag.technologies = technologies.ToSelectListItems();
@@ -102,6 +136,12 @@ namespace Library.Web.Controllers
         public async Task<PartialViewResult> CreateAuthor()
         {
             var authors = await _authorsService.ReadAll();
+
+            authors.Sort(delegate(AuthorModel model, AuthorModel authorModel)
+            {
+                return string.Compare(model.Surname, authorModel.Surname, StringComparison.Ordinal);
+            });
+
             return PartialView(authors.ToSelectListItems()); 
         }
 
@@ -124,6 +164,12 @@ namespace Library.Web.Controllers
         {
             await Task.Delay(1000);
             var authors = await _authorsService.ReadAll();
+
+            authors.Sort(delegate(AuthorModel model, AuthorModel authorModel)
+            {
+                return string.Compare(model.Surname, authorModel.Surname, StringComparison.Ordinal);
+            });
+
             return PartialView(authors.ToSelectListItems());
         }
         
@@ -132,6 +178,12 @@ namespace Library.Web.Controllers
         {
             await Task.Delay(1000);
             var publishings = await _publishingsService.ReadAll();
+
+            publishings.Sort(delegate(PublishingModel model, PublishingModel publishingModel)
+            {
+                return string.Compare(model.Name, publishingModel.Name, StringComparison.Ordinal);
+            });
+
             return PartialView(publishings.ToSelectListItems());
         }
         
@@ -139,7 +191,13 @@ namespace Library.Web.Controllers
         public async Task<IActionResult> GetTechnologies()
         {
             await Task.Delay(1000);
-            var technologies = await _technologiesService.ReadAll();            
+            var technologies = await _technologiesService.ReadAll();
+
+            technologies.Sort(delegate(TechnologyModel model, TechnologyModel technologyModel)
+            {
+                return string.Compare(model.Name, technologyModel.Name, StringComparison.Ordinal);
+            });
+            
             return PartialView(technologies.ToSelectListItems());
         }
     }

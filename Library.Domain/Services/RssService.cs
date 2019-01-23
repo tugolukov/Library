@@ -27,7 +27,44 @@ namespace Library.Domain.Services
             _context = context;
             _mapper = mapper;
         }
-        
+
+        public async Task<List<RssItemModelFull>> Get()
+        {
+            var sources = await GetSources();
+            
+            List<RssItemModelFull> result = new List<RssItemModelFull>();
+
+            foreach (var source in sources)
+            {
+                foreach (var item in source.Items)
+                {
+                    RssItemModelFull model = new RssItemModelFull();
+                    model.RssItemGuid = item.RssItemGuid;
+                    model.RssSourceGuid = item.RssSourceGuid;
+                    model.Title = item.Title;
+                    model.Description = item.Description;
+                    model.Link = item.Link;
+                    model.PubDate = item.PubDate;
+                    model.PubDateString = item.PubDateString;
+
+                    var s = await _context.RssSources.FirstOrDefaultAsync(a => a.RssSourceGuid == model.RssSourceGuid);
+                    
+                    model.SourceModel = new RssSourceModel()
+                    {
+                        RssSourceGuid = s.RssSourceGuid,
+                        Title = s.Title, 
+                        Uri = s.Uri
+                    };
+                    
+                    result.Add(model);
+                }
+            }
+            
+            result.Sort((full, modelFull) => DateTimeOffset.Compare(full.PubDate, modelFull.PubDate));
+
+            return result;
+        }
+
         /// <inheritdoc />
         public async Task<List<RssGroupModel>> GetSources()
         {

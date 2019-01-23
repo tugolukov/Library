@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Library.Domain.Interfaces;
 using Library.Domain.Models.RSS;
@@ -19,11 +20,27 @@ namespace Library.Web.Controllers
             _rssService = rssService;
         }
 
+        [HttpGet]
+        public async Task<ViewResult> Get(int page = 1)
+        {
+            var result = await _rssService.Get();
+
+            int size = 10;
+            var len = result.Count;
+            var pagesCount = len / size;
+
+            ViewBag.count = pagesCount;
+
+            result = result.Skip(size * (page - 1)).Take(size).ToList();
+            
+            return View(result);
+        }
+
         /// <summary>
         /// Получение страницы с новостями
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("/morenews")]
         public async Task<ViewResult> GetAll()
         {
             var results = await _rssService.GetSources();
