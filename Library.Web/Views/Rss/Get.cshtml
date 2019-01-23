@@ -1,8 +1,8 @@
 @using System.Web
-@model System.Collections.Generic.List<Library.Domain.Models.RSS.RssItemModelFull>
+@model RssModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "RSS";
     Layout = "_Layout";
 }
 
@@ -27,7 +27,7 @@
         </div>
         <div class="col-sm-8">
             <div class="btn-group" role="group" aria-label="btn group" style="float: right">
-                @if (Model.Any(a => a.SourceModel.Uri == null))
+                @if (Model.FullItems.Any(a => a.SourceModel.Uri == null))
                 {
                     <button class="btn btn-light-green" type="button" data-toggle="modal" data-target="#CreateArticle">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -152,11 +152,10 @@
             </div>
         </div>
     </div>
+    <hr/>
 
-    <hr>
 
-
-    @if (@Model.Count == 0)
+    @if (@Model.Items.Count == 0)
     {
         <div class="alert alert-info" role="alert">
             Новостей пока нет. Добавьте источник RSS, чтобы увидеть новостную ленту.
@@ -164,8 +163,7 @@
     }
     else
     {
-        <div class="container">
-            @foreach (var item in Model)
+            foreach (var item in Model.Items)
             {
                 <div class="card mb-1">
                     <div class="card-header">
@@ -183,18 +181,21 @@
                         <h4 class="card-title">@item.Title</h4>
                         <p class="card-text">@Html.Raw(HttpUtility.HtmlDecode(@item.Description))</p>
                     </div>
-                    <div class="card-footer">
-                        <a href="@item.Link" class="btn btn-light">Подробнее</a>
-                    </div>
+                    @if (!String.IsNullOrEmpty(item.Link))
+                    {
+                        <div class="card-footer">
+                            <a href="@item.Link" class="btn btn-light">Подробнее</a>
+                        </div>
+                    }
                 </div>
             }
             
             <hr/>
             
             <div class="btn-group" role="group" aria-label="Basic example">
-                @if (Model.PreviousPage != 0)
+                @if (Model.CurrentPage != 1)
                 {
-                    <a class="btn btn-light-green" role="button" asp-controller="Books" asp-action="ReadAll" asp-route-page="@Model.PreviousPage">Предыдущая</a>
+                    <a class="btn btn-light-green" role="button" asp-controller="Rss" asp-action="Get" asp-route-page="@Model.PreviousPage">Предыдущая</a>
                 }
 
                 @for (int i = 1; i <= Model.Count; i++)
@@ -205,17 +206,16 @@
                     }
                     else
                     {
-                        <a class="btn btn-light-green" role="button" asp-controller="Books" asp-action="ReadAll" asp-route-page="@i">@i</a>
+                        <a class="btn btn-light-green" role="button" asp-controller="Rss" asp-action="Get" asp-route-page="@i">@i</a>
                     }
                 }
 
-                @if (Model.NextPage <= Model.Count)
+                @if (Model.CurrentPage < Model.Count)
                 {
-                    <a class="btn btn-light-green" role="button" asp-controller="Books" asp-action="ReadAll" asp-route-page="@Model.NextPage">Следующая</a>
+                    <a class="btn btn-light-green" role="button" asp-controller="Rss" asp-action="Get" asp-route-page="@Model.NextPage">Следующая</a>
                 }
 
             </div>
-        </div>
     }
 </div>
 
@@ -230,14 +230,13 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="uri" class="form-control validate" required="">
-                        <label data-error="wrong" data-success="right" for="uri">Ссылка</label>
-                        <div class="valid-tooltip">
+                    <div class="form-group">
+                        <label for="uri">Ссылка</label>
+                        <input type="text" name="uri" class="form-control mysearch validate" required>
+                        <div class="valid-feedback">
                             Верно!
                         </div>
-                        <div class="invalid-tooltip">
+                        <div class="invalid-feedback">
                             Значение не может быть пустым
                         </div>
                     </div>
@@ -264,14 +263,13 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="name" class="form-control validate" required="">
-                        <label data-error="wrong" data-success="right" for="name">Название</label>
-                        <div class="valid-tooltip">
+                    <div class="form-group">
+                        <label for="name">Название</label>
+                        <input type="text" name="name" class="form-control mysearch validate" required>
+                        <div class="valid-feedback">
                             Верно!
                         </div>
-                        <div class="invalid-tooltip">
+                        <div class="invalid-feedback">
                             Значение не может быть пустым
                         </div>
                     </div>
@@ -298,58 +296,48 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
-
-                    <select class="form-control mysearch" id="source-dropdown" name="rsssourceguid" required>
+                    <label data-error="Значение не может быть пустым" data-success="" for="source-dropdown">Название канала*</label>
+                    <select class="form-control mysearch validate" id="source-dropdown" name="rsssourceguid" required>
                         <option value="">Выберите канал</option>
-                        @foreach (var item in @Model.Where(@a => a.SourceModel.Uri == null).ToList())
+                        @foreach (var item in @Model.FullItems.Where(@a => a.SourceModel.Uri == null).ToList())
                         {
                             <option value="@item.SourceModel.RssSourceGuid">@item.SourceModel.Title</option>
                         }
                     </select>
-                    <div class="valid-tooltip">
+                    <div class="valid-feedback">
                         Верно!
                     </div>
-                    <div class="invalid-tooltip">
+                    <div class="invalid-feedback">
                         Выберите один пункт из выпадающего списка
                     </div>
 
-                    <div class="md-form mb-5">
-                        <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="title" class="form-control validate" required="">
-                        <label for="title">Заголовок</label>
-                        <div class="valid-tooltip">
+                    <div class="form-group">
+                        <label for="title">Заголовок*</label>
+                        <input type="text" name="title" class="form-control mysearch validate" required>
+                        <div class="valid-feedback">
                             Верно!
                         </div>
-                        <div class="invalid-tooltip">
+                        <div class="invalid-feedback">
                             Значение не может быть пустым
                         </div>
                     </div>
-                    <div class="md-form mb-5">
-                        <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <textarea type="text" id="description" name="description" class="md-textarea form-control" rows="4" required></textarea>
-                        <label for="description">Название</label>
-                        <div class="valid-tooltip">
+                    <div class="form-group">
+                        <label for="description">Содержимое*</label>
+                        <textarea type="text" id="description" name="description" class="md-textarea form-control" rows="4" required style="border-radius: 10px "></textarea>
+                        <div class="valid-feedback">
                             Верно!
                         </div>
-                        <div class="invalid-tooltip">
+                        <div class="invalid-feedback">
                             Значение не может быть пустым
                         </div>
                     </div>
-                    <div class="md-form mb-5">
-                        <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="link" class="form-control validate" required="">
-                        <label for="link">Ссылка на источник</label>
-                        <div class="valid-tooltip">
-                            Верно!
-                        </div>
-                        <div class="invalid-tooltip">
-                            Значение не может быть пустым
-                        </div>
+                    <div class="form-group">
+                        <label for="link">Ссылка на источник (необязательно)</label>
+                        <input type="text" name="link" class="form-control mysearch">
                     </div>
-                    <div class="md-form mb-5">
-                        <i class="fa fa-external-link-square prefix grey-text"></i>
-                        <input type="text" name="enclosure" class="form-control">
-                        <label for="enclosure">Ссылка на изображение</label>
+                    <div class="form-group">
+                        <label for="enclosure">Ссылка на изображение (необязательно)</label>
+                        <input type="text" name="enclosure" class="form-control mysearch">
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">

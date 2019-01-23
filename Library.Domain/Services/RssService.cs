@@ -60,7 +60,7 @@ namespace Library.Domain.Services
                 }
             }
             
-            result.Sort((full, modelFull) => DateTimeOffset.Compare(full.PubDate, modelFull.PubDate));
+            result.Sort((full, modelFull) => DateTimeOffset.Compare(modelFull.PubDate, full.PubDate));
 
             return result;
         }
@@ -81,6 +81,11 @@ namespace Library.Domain.Services
                 };
                 
                 result.Add(group);
+            }
+
+            foreach (var item in result)
+            {
+                item.Items.Sort((full, modelFull) => DateTimeOffset.Compare(modelFull.PubDate, full.PubDate));
             }
             
             return result;
@@ -175,6 +180,18 @@ namespace Library.Domain.Services
             RssSource source = new RssSource(title);
             _context.RssSources.Add(source);
             await _context.SaveChangesAsync();
+            
+            RssItem item = new RssItem()
+            {
+                Description = "Создан канал: " + source.Title,
+                PubDate = DateTimeOffset.Now,
+                RssItemGuid = Guid.NewGuid(),
+                RssSourceGuid = source.RssSourceGuid,
+                Title = "Создание канала"
+            };
+            _context.RssItems.Add(item);
+            await _context.SaveChangesAsync();
+            
             return source.RssSourceGuid;
         }
 

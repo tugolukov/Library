@@ -148,7 +148,7 @@ namespace Library.Web.Controllers
         [HttpGet("delete")]
         public async Task<RedirectToActionResult> Delete(Guid guid)
         {
-            await _booksService.Delete(guid);
+            //await _booksService.Delete(guid); чтоб поиск оживить
             return RedirectToAction(nameof(ReadAll));
         }
 

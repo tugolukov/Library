@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Library.Domain.Interfaces;
 using Library.Domain.Models.RSS;
+using Library.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Web.Controllers
@@ -23,15 +24,17 @@ namespace Library.Web.Controllers
         [HttpGet]
         public async Task<ViewResult> Get(int page = 1)
         {
-            var result = await _rssService.Get();
+            var items = await _rssService.Get();
 
-            int size = 10;
-            var len = result.Count;
-            var pagesCount = len / size;
-
-            ViewBag.count = pagesCount;
-
-            result = result.Skip(size * (page - 1)).Take(size).ToList();
+            RssModel result = new RssModel()
+            {
+                Items = items.Skip(10*(page-1)).Take(10).ToList(),
+                FullItems = items,
+                CurrentPage = page,
+                PreviousPage = page-1,
+                NextPage = page+1,
+                Count = items.Count/10 + 1
+            };
             
             return View(result);
         }
@@ -56,7 +59,7 @@ namespace Library.Web.Controllers
         public async Task<RedirectToActionResult> AddSource(string uri)
         {
             await _rssService.AddSourceWithUrl(uri);
-            return RedirectToAction(nameof(GetAll));
+            return RedirectToAction(nameof(Get));
         }
         
         /// <summary>
@@ -68,7 +71,7 @@ namespace Library.Web.Controllers
         public async Task<RedirectToActionResult> AddMySource(string name)
         {
             await _rssService.AddSourceWithoutUrl(name);
-            return RedirectToAction(nameof(GetAll));
+            return RedirectToAction(nameof(Get));
         }
 
         /// <summary>
@@ -82,7 +85,7 @@ namespace Library.Web.Controllers
             item.RssItemGuid = Guid.NewGuid();
             item.PubDate = DateTimeOffset.Now;
             var result = await _rssService.AddItem(item);
-            return RedirectToAction(nameof(GetAll));
+            return RedirectToAction(nameof(Get));
         }
         
     }
