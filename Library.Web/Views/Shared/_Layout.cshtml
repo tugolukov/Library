@@ -151,10 +151,8 @@
                         </div>
                     </li>
                 </ul>
-                <form class="form-inline my-1" action="https://yandex.ru/search/site/" method="get" target="_blank" accept-charset="utf-8">
-                    <input type="hidden" name="searchid" value="2334526"/>
-                    <input type="hidden" name="l10n" value="ru"/>
-                    <input type="hidden" name="reqenc" value=""/>
+                
+                <form method="post" class="form-inline my-1" asp-controller="Search" asp-action="SearchAll">
                     <div class="md-form form-sm my-0">
                         <input type="search" class="form-control mysearch" aria-label="Search" name="text" placeholder="Найти на сайте" value="" style="width: 300px"/>
                     </div>

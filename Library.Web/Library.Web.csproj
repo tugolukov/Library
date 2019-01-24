@@ -32,4 +32,9 @@
       <ProjectReference Include="..\Library.Parser\Library.Parser.csproj" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Yandex\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

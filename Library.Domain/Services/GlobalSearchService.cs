@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Library.Domain.Interfaces;
 using Library.Domain.Models.Search;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Library.Domain.Services
 {
@@ -21,43 +22,103 @@ namespace Library.Domain.Services
         }
 
         public async Task<List<SearchResult>> Search(string param)
-        {
-            List<string> parameters = param.Split(' ').ToList();
-            
-            string baseUrl = "http://localhost:4400/books/";
-
-            // get a list of published articles
-            var books = await _booksService.ReadAll();
-
+        {         
+            List<string> allParameters = param.Split(new [] {' ', ';', ','}).ToList();
+            List<string> parameters = new List<string>();
             List<SearchResult> urls = new List<SearchResult>();
+            string baseUrl = "http://itlibrary.site/books/";
+            double increment = 0.05;
 
-            foreach (var p in parameters)
+            foreach (var item in allParameters)
             {
-                string parameter = p.ToUpper();
-                foreach(var book in books)
+                if (!String.IsNullOrEmpty(item))
                 {
-                    if (book.Title.ToUpper().Contains(parameter) 
-                        || book.Annotation.ToUpper().Contains(parameter) 
-                        || book.AuthorModel[0].Surname.ToUpper().Contains(parameter) 
-                        || book.AuthorModel[0].Name.ToUpper().Contains(parameter) 
-                        || book.AuthorModel[0].Patronymic.ToUpper().Contains(parameter) 
-                        || book.AuthorModel[0].Note.ToUpper().Contains(parameter) 
-                        || book.PublishingModel.Name.ToUpper().Contains(parameter) 
-                        || book.TechnologyModel.Name.ToUpper().Contains(parameter) 
-                        || book.TechnologyModel.Description.ToUpper().Contains(parameter) 
-                        || book.TechnologyModel.Language.ToUpper().Contains(parameter))
-                    {
-                        Console.WriteLine("plplplplpl");
-                        urls.Add(
-                            new SearchResult()
-                            {
-                                Title = book.Title,
-                                Uri = baseUrl + book.BookGuid
-                            });
-                        Console.WriteLine("popopopo");
-                    }
+                    parameters.Add(item);
                 }
             }
+
+            if (parameters.Count == 0)
+            {
+                return urls;
+            }
+            
+            if (param.ToUpper().Contains("СЕРВИС")
+                ||param.ToUpper().Contains("ВИДЖЕТ")
+                ||param.ToUpper().Contains("ПОЛЕЗНОЕ"))
+            {
+                var services = new SearchResult()
+                {
+                    Title = "Сервисы",
+                    Description = "На странице представлены виджеты для удобного представления погоды, времени и прочих данных. Перейдите по ссылке, чтобы воспользоваться",
+                    Probability = 10.0,
+                    Uri = "http://itlibrary.site/services/"
+                };
+                urls.Add(services);
+            }
+
+            if (param.ToUpper().Contains("XML"))
+            {
+                var services = new SearchResult()
+                {
+                    Title = "XML",
+                    Description = "XML-представление содержимого базы данных. Перейдите для просмотра.",
+                    Probability = 10.0,
+                    Uri = "http://itlibrary.site/xml/"
+                };
+                urls.Add(services);
+            }
+
+            if (param.ToUpper().Contains("НОВОСТИ") ||
+                param.ToUpper().Contains("RSS"))
+            {
+                var services = new SearchResult()
+                {
+                    Title = "RSS-новости",
+                    Description = "Новостные каналы. Добавляй существующие, создавай свои и просматривай в удобном виде.",
+                    Probability = 10.0,
+                    Uri = "http://itlibrary.site/rss/"
+                };
+                urls.Add(services);
+            }
+            
+            var books = await _booksService.ReadAll();
+
+            foreach (var book in books)
+            {
+                // Проверяем книгу на вхождение параметров
+                SearchResult findBook = new SearchResult();
+                findBook.Probability = 0.0;
+                var bookUri = baseUrl + book.BookGuid.ToString();
+
+                // Тут можно выгрузить описание со страницы
+                var root = GetRootNode(bookUri);
+                var node = root.Descendants("meta").ToList();
+                var description = node[3].Attributes[1].DeEntitizeValue.ToUpper(); // костыль лютый, но шо поделать
+                
+                foreach (var parameter in parameters)
+                {
+                    if (description.Contains(parameter.ToUpper()))
+                    {
+                        int count = 1;
+                        count = count + description.Split(new string[] {parameter.ToUpper()}, StringSplitOptions.None).Count() - 1;
+                        
+                        findBook.Probability = (findBook.Probability + increment) * count;
+                        findBook.Uri = bookUri;
+                        findBook.Title = book.Title;
+                        findBook.Description = book.Annotation;
+                    }
+                }
+
+                if (findBook.Probability > 0.0)
+                {
+                    urls.Add(findBook);
+                }
+
+                findBook = null;
+            }
+
+            urls = urls.OrderByDescending(a => a.Probability).ToList();
+            
             return urls;
         }
         

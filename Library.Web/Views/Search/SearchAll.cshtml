@@ -6,15 +6,34 @@
 }
 
 <div class="container">
-    @foreach (var item in @Model)
+    @if (Model.Count == 0)
     {
-        <div class="row">
-        <div class="col-8">
-            <h5>@item.Title</h5>
-        </div>
-            <div class="col-4">
-                <a role="button" class="btn btn-black" href="@item.Uri">Перейти</a>
-            </div>
+        <div class="alert alert-warning alert-dismissible fade show">
+            <h4 class="alert-heading">Результаты поиска</h4>
+            <p>
+                По указанному запросу <b>"@ViewBag.search"</b> ничего не найдено. 
+            </p>
         </div>
     }
+    else
+    {
+        <div class="alert alert-info alert-dismissible fade show">
+            <h4 class="alert-heading">Результаты поиска</h4>
+            <p>
+                Введенный запрос: "<b>@ViewBag.search</b>"
+            </p>
+        </div>
+        foreach (var item in @Model)
+         {
+             <div class="card mb-1">
+                 <div class="card-body">
+                     <h4 class="card-title">
+                         <a href="@item.Uri">@item.Title</a>
+                     </h4>
+                     <p class="card-text">@item.Description</p>
+                 </div>
+             </div>
+         }
+    }
+
 </div>

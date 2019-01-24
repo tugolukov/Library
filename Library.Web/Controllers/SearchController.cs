@@ -27,7 +27,8 @@ namespace Library.Web.Controllers
             ISearchService searchService, 
             ITechnologiesService technologiesService, 
             IBooksService booksService, 
-            IAuthorsService authorsService, IGlobalSearchService globalSearchService)
+            IAuthorsService authorsService, 
+            IGlobalSearchService globalSearchService)
         {
             _searchService = searchService;
             _technologiesService = technologiesService;
@@ -236,10 +237,13 @@ namespace Library.Web.Controllers
         }
 
         [HttpPost("all")]
-        public async Task<IActionResult> SearchAll(string param)
+        public async Task<IActionResult> SearchAll()
         {
+            var form = await Request.ReadFormAsync();
+            var param = form.FirstOrDefault(a => a.Key == "text").Value.ToString();
+            
+            ViewBag.search = param;
             var result = await _globalSearchService.Search(param);
-
             return View(result);
         }
     }
