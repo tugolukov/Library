@@ -1,113 +1,817 @@
-<urlset 
-        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    <!--
-    created with Free Online Sitemap Generator www.xml-sitemaps.com 
-   -->
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
     <url>
         <loc>http://itlibrary.site/</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/search</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books/statistic</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/services</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/xml</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>http://itlibrary.site/Home/Links</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <loc>http://itlibrary.site/links</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/rss</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>http://itlibrary.site/Home/About</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <loc>http://itlibrary.site/about</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>http://itlibrary.site/Home/Rules</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <loc>http://itlibrary.site/rules</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books/create</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/2a08ad84-7ebb-450f-b49f-70f34a97f0cc</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/2a08ad84-7ebb-450f-b49f-70f34a97f0cc</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/24985e1c-e7b2-4341-8547-59aac1fdb2f3</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/24985e1c-e7b2-4341-8547-59aac1fdb2f3</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/1444e351-f95d-40ab-828c-ffa734bfc0d2</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/1444e351-f95d-40ab-828c-ffa734bfc0d2</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/90e7e654-a473-4c6a-945f-63b3ce8665d9</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/90e7e654-a473-4c6a-945f-63b3ce8665d9</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0bee5bc6-3cc5-4ae0-b342-8946f8143182</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0bee5bc6-3cc5-4ae0-b342-8946f8143182</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/f4d42932-673f-40c4-a6c1-446bc89bb9ea</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/f4d42932-673f-40c4-a6c1-446bc89bb9ea</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/32fd1287-b310-40dc-879f-d428240d3c39</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/32fd1287-b310-40dc-879f-d428240d3c39</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/314ed6f9-e62d-4711-bb20-2959a4c88695</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/314ed6f9-e62d-4711-bb20-2959a4c88695</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0da22a3e-08d9-41e8-800f-e2b4e968d7de</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0da22a3e-08d9-41e8-800f-e2b4e968d7de</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/6a805bd9-10b5-4677-8a8d-714addb2805b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/6a805bd9-10b5-4677-8a8d-714addb2805b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books?page=2</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books?page=3</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books?page=4</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books?page=5</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books?page=6</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books?page=7</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>http://itlibrary.site/books?page=8</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <loc>http://itlibrary.site/morenews</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>http://itlibrary.site/books?page=9</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <loc>http://itlibrary.site/rss?page=2</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.64</priority>
     </url>
     <url>
-        <loc>http://itlibrary.site/books?page=10</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
-        <priority>0.64</priority>
+        <loc>http://itlibrary.site/books/5c418356-0e72-4d1e-b3de-890522fdfca1</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/5c418356-0e72-4d1e-b3de-890522fdfca1</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/6164e399-09b4-482e-9b3c-9ca93b22bb8a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/6164e399-09b4-482e-9b3c-9ca93b22bb8a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/296b979f-3456-4ab9-ab25-750bf5d3d86f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/296b979f-3456-4ab9-ab25-750bf5d3d86f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d8a21f67-b0ff-40d2-8dad-65ccaad59a32</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d8a21f67-b0ff-40d2-8dad-65ccaad59a32</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/b8e17033-a92e-4f20-bc2c-9af2ea45dfea</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/b8e17033-a92e-4f20-bc2c-9af2ea45dfea</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/c26b0cf7-02b2-49fc-a612-d87c9669b758</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/c26b0cf7-02b2-49fc-a612-d87c9669b758</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/886a1ad6-67d1-4c16-86bb-417d5b6c4c1b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/886a1ad6-67d1-4c16-86bb-417d5b6c4c1b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/2165763c-222c-4158-88a6-6fb72ad6cb7f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/2165763c-222c-4158-88a6-6fb72ad6cb7f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/868d7d5e-2255-453a-ab7c-7b384052731d</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/868d7d5e-2255-453a-ab7c-7b384052731d</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/197430d0-b876-4564-8328-f3f045c57028</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/197430d0-b876-4564-8328-f3f045c57028</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
     </url>
     <url>
         <loc>http://itlibrary.site/books?page=1</loc>
-        <lastmod>2018-11-29T22:02:10+00:00</lastmod>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
         <priority>0.51</priority>
     </url>
+    <url>
+        <loc>http://itlibrary.site/books/c7146707-8388-41f4-9226-9d223347be51</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/c7146707-8388-41f4-9226-9d223347be51</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/82348482-2a74-4030-9fe0-e202d89c0462</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/82348482-2a74-4030-9fe0-e202d89c0462</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d10e4048-2673-4ef3-adb9-01bd310071dc</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d10e4048-2673-4ef3-adb9-01bd310071dc</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/c7033c21-787d-4316-a5a6-5cced2d9bea8</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/c7033c21-787d-4316-a5a6-5cced2d9bea8</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/7384d328-dd90-4b3c-9a8c-1ede04c5fa07</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/7384d328-dd90-4b3c-9a8c-1ede04c5fa07</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/1b42dfef-cf02-4a0e-8496-df2d528be10f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/1b42dfef-cf02-4a0e-8496-df2d528be10f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/7e06de19-d0df-4ad9-bf99-0e7f06b7fa6c</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/7e06de19-d0df-4ad9-bf99-0e7f06b7fa6c</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0bbafe9b-c9d5-46db-b8b4-b04fce950fe0</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0bbafe9b-c9d5-46db-b8b4-b04fce950fe0</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d3f53c09-2600-4979-9a8f-8f341e62058a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d3f53c09-2600-4979-9a8f-8f341e62058a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/26c82342-a54d-4e11-bd91-4f8709a6365a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/26c82342-a54d-4e11-bd91-4f8709a6365a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d3726c9d-4105-4167-a22c-2cb760cf0338</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d3726c9d-4105-4167-a22c-2cb760cf0338</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/eb6513b9-1841-43ce-b21a-af9c0695b432</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/eb6513b9-1841-43ce-b21a-af9c0695b432</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/bc44b890-dc9e-47a8-9cef-6a234f93cfe4</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/bc44b890-dc9e-47a8-9cef-6a234f93cfe4</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/cc73da08-6a9f-4430-a8e8-09f28eb1d191</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/cc73da08-6a9f-4430-a8e8-09f28eb1d191</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/ebd86922-0cf3-4f07-8efe-13e0f8e227df</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/ebd86922-0cf3-4f07-8efe-13e0f8e227df</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/8d5656d8-7ddd-4986-ac14-9da445f42275</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/8d5656d8-7ddd-4986-ac14-9da445f42275</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/ff8d2b27-25f4-45b7-82f5-f2e992ec8125</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/ff8d2b27-25f4-45b7-82f5-f2e992ec8125</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/80303f1b-d277-475f-a34c-36e78fa08527</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/80303f1b-d277-475f-a34c-36e78fa08527</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0fe7b2cb-9009-4df9-96c3-356c05b07f32</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0fe7b2cb-9009-4df9-96c3-356c05b07f32</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/77a5fa2f-03b5-4825-a4fc-4185c9ceb574</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/77a5fa2f-03b5-4825-a4fc-4185c9ceb574</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/2bacb498-5dba-4d9a-9aa9-0753382d7294</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/2bacb498-5dba-4d9a-9aa9-0753382d7294</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/b247ed53-217b-4b24-b93b-f218a351a6e2</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/b247ed53-217b-4b24-b93b-f218a351a6e2</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/4880429b-e49d-43b5-90bb-0cc7e657f9b8</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/4880429b-e49d-43b5-90bb-0cc7e657f9b8</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/53365d43-cf9f-44b0-8d3d-8063a07d191b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/53365d43-cf9f-44b0-8d3d-8063a07d191b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/8d36a5bb-1161-496a-b669-602a755fabf7</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/8d36a5bb-1161-496a-b669-602a755fabf7</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/85870c01-51e5-44f5-b57f-79ced7f9de3f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/85870c01-51e5-44f5-b57f-79ced7f9de3f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e7c92cdd-f0c8-4e3b-930a-985dcf60f57e</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e7c92cdd-f0c8-4e3b-930a-985dcf60f57e</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/152867f0-9cc3-475f-8a69-d5cc1d877654</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/152867f0-9cc3-475f-8a69-d5cc1d877654</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e01cd524-e630-4e5e-a897-c8df750ec3ea</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e01cd524-e630-4e5e-a897-c8df750ec3ea</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e6c80edd-2472-41ae-abff-6f0d91ab6f02</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e6c80edd-2472-41ae-abff-6f0d91ab6f02</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/3cad196b-cf7b-4363-9f78-ef84c943d01f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/3cad196b-cf7b-4363-9f78-ef84c943d01f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/911cc905-9980-4601-87c5-13c7c305d61b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/911cc905-9980-4601-87c5-13c7c305d61b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/9881a32b-50b6-4766-b9f2-9bb0ce42297e</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/9881a32b-50b6-4766-b9f2-9bb0ce42297e</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/88c003ba-ebd4-4014-b6b2-de6657c87b52</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/88c003ba-ebd4-4014-b6b2-de6657c87b52</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d099484f-62a2-4b26-b5cf-22e61c2a9c66</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d099484f-62a2-4b26-b5cf-22e61c2a9c66</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/57ff49f0-7b75-468d-9aa9-79fea5746691</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/57ff49f0-7b75-468d-9aa9-79fea5746691</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/9ddbfa44-882d-4ee1-8422-7ad4e371c330</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/9ddbfa44-882d-4ee1-8422-7ad4e371c330</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0a2da7a3-6210-42e7-8a8a-d4302fdc8389</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/0a2da7a3-6210-42e7-8a8a-d4302fdc8389</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/dfb35231-1f25-464e-81ee-cce44c518c6b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/dfb35231-1f25-464e-81ee-cce44c518c6b</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d8194eb0-960c-4dee-a78b-e8c032ee007f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/d8194eb0-960c-4dee-a78b-e8c032ee007f</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e9881a79-4893-46a6-a877-2c0a7fbf9797</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e9881a79-4893-46a6-a877-2c0a7fbf9797</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/2ad731f9-91da-4730-8f94-cc1f635f8df8</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/2ad731f9-91da-4730-8f94-cc1f635f8df8</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/f48c57f2-df74-49e5-b592-e1352c2a08d3</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/f48c57f2-df74-49e5-b592-e1352c2a08d3</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/3935c2bb-0f39-4287-9219-717b53a0f36a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/3935c2bb-0f39-4287-9219-717b53a0f36a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/6aa44cd0-7f3d-4f9e-875b-dcf97aca4579</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/6aa44cd0-7f3d-4f9e-875b-dcf97aca4579</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e9a479ce-5cdc-4efc-badf-0f9a7a9844f9</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/e9a479ce-5cdc-4efc-badf-0f9a7a9844f9</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/a7a4d935-142c-4c94-a7df-e5fbbd95f4c4</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/a7a4d935-142c-4c94-a7df-e5fbbd95f4c4</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/22f60966-a5bf-42c8-aa88-36f76648064a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/22f60966-a5bf-42c8-aa88-36f76648064a</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/21c6a4c1-9b48-4fba-9633-2c3985074905</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/21c6a4c1-9b48-4fba-9633-2c3985074905</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/27b2f24c-1647-4334-91c9-a02d95e51111</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/books/27b2f24c-1647-4334-91c9-a02d95e51111</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+    <url>
+        <loc>http://itlibrary.site/rss?page=1</loc>
+        <lastmod>2019-01-24T00:14:02+00:00</lastmod>
+        <priority>0.51</priority>
+    </url>
+
+
 </urlset>
