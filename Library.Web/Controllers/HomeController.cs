@@ -82,7 +82,7 @@ namespace Library.Web.Controllers
             stringBuilder.AppendLine("disallow: /books/delete/");
             stringBuilder.AppendLine("disallow: /books/edit/");
             stringBuilder.AppendLine("allow: /error/foo");
-            stringBuilder.AppendLine("sitemap: http://itlibrary.site/sitemap.xml");
+            stringBuilder.AppendLine("sitemap: http://itlibrary.site/utils/sitemap.xml");
         
             return this.Content(stringBuilder.ToString(), "text/plain", Encoding.UTF8);
         }
@@ -91,7 +91,7 @@ namespace Library.Web.Controllers
         /// Карта сайта
         /// </summary>
         /// <returns></returns>
-        [Route("sitemap.xml")]
+        [Route("oldsitemap.xml")]
         [HttpGet]
         public ContentResult SitemapXml()
         {
