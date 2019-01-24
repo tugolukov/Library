@@ -1,0 +1,20 @@
+@model List<Library.Domain.Models.Search.SearchResult>
+
+@{
+    ViewBag.Title = "Результат поиска";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    @foreach (var item in @Model)
+    {
+        <div class="row">
+        <div class="col-8">
+            <h5>@item.Title</h5>
+        </div>
+            <div class="col-4">
+                <a role="button" class="btn btn-black" href="@item.Uri">Перейти</a>
+            </div>
+        </div>
+    }
+</div>

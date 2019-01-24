@@ -21,17 +21,19 @@ namespace Library.Web.Controllers
         private readonly ITechnologiesService _technologiesService;
         private readonly IBooksService _booksService;
         private readonly IAuthorsService _authorsService;
+        private readonly IGlobalSearchService _globalSearchService;
 
         public SearchController(
             ISearchService searchService, 
             ITechnologiesService technologiesService, 
             IBooksService booksService, 
-            IAuthorsService authorsService)
+            IAuthorsService authorsService, IGlobalSearchService globalSearchService)
         {
             _searchService = searchService;
             _technologiesService = technologiesService;
             _booksService = booksService;
             _authorsService = authorsService;
+            _globalSearchService = globalSearchService;
         }
 
         [HttpGet]
@@ -231,6 +233,14 @@ namespace Library.Web.Controllers
             };
 
             return PartialView(result);
+        }
+
+        [HttpPost("all")]
+        public async Task<IActionResult> SearchAll(string param)
+        {
+            var result = await _globalSearchService.Search(param);
+
+            return View(result);
         }
     }
 }

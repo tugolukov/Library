@@ -52,7 +52,7 @@ namespace Library.Web
             services.AddEntityFrameworkNpgsql().AddDbContext<DatabaseContext>(options =>
             {
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection"),
+                    Configuration.GetConnectionString("DefaultConnection"),    
                     c => c.MigrationsAssembly("Library.Web"));
             });
 

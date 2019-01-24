@@ -17,6 +17,7 @@ namespace Library.Web.Controllers
         }
 
         [Route("sitemap.xml")]
+        [HttpGet]
         public async Task<IActionResult> Sitemap()
         {
             string baseUrl = "http://itlibrary.site/books/";

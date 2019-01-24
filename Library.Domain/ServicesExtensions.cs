@@ -15,6 +15,7 @@ namespace Library.Domain
             services.AddScoped<ISearchService, SearchService>();
             services.AddScoped<IParserService, ParserService>();
             services.AddScoped<IRssService, RssService>();
+            services.AddScoped<IGlobalSearchService, GlobalSearchService>();
 
             return services;
         }
